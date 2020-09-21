@@ -9,6 +9,8 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-gray-100">
 
@@ -20,7 +22,11 @@
 
   {{-- @include('layouts.footer') --}}
 
+  <!-- Flash Messages -->
+  <x-flash key="success" />
+  <x-flash key="danger" />
+
   <!-- Scripts -->
-  <script src="{{ mix('js/app.js') }}" />
+  <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

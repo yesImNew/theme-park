@@ -42,7 +42,8 @@ class HotelController extends Controller
         ]);
 
         Hotel::create($data);
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.index')
+            ->with('success', ['Created', 'New hotel created']);
     }
 
     /**
@@ -81,7 +82,8 @@ class HotelController extends Controller
         ]);
 
         $hotel->update($data);
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.index')
+            ->with('success', ['Updated', 'Hotel details updated']);
     }
 
     /**
@@ -94,6 +96,7 @@ class HotelController extends Controller
     {
         $hotel->delete();
 
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.index')
+            ->with('danger', ['Deleted' , 'Hotel deleted']);;
     }
 }
