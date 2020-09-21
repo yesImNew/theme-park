@@ -8,9 +8,9 @@
       <span class="ml-3 text-xl">{{ config('app.name') }}</span>
     </a>
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900" href="{{ route('home') }}">Home</a>
-      <a class="mr-5 hover:text-gray-900">Customers</a>
-      <a class="mr-5 hover:text-gray-900">Hotels</a>
+      <a class="mr-5 {{ Request::is('/') ? 'text-blue-500' : 'hover:text-gray-900' }}" href="{{ route('home') }}">Home</a>
+      <a class="mr-5 {{ Request::is('customers*') ? 'text-blue-500' : 'hover:text-gray-900' }}">Customers</a>
+      <a class="mr-5 {{ Request::is('hotels*') ? 'text-blue-500' : 'hover:text-gray-900' }}" href="{{ route('hotels.index') }}">Hotels</a>
       <a class="mr-5 hover:text-gray-900">Rooms</a>
       <a class="mr-5 hover:text-gray-900">Activities</a>
     </nav>

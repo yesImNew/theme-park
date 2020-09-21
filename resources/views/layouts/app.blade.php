@@ -10,7 +10,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body>
+<body class="bg-gray-100">
 
   @include('layouts.nav')
 
@@ -21,6 +21,6 @@
   {{-- @include('layouts.footer') --}}
 
   <!-- Scripts -->
-  <link rel="stylesheet" href="{{ mix('js/app.js') }}">
+  <script src="{{ mix('js/app.js') }}" />
 </body>
 </html>
