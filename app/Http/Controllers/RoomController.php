@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Hotel;
+
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RoomController extends Controller
 {
@@ -44,7 +46,14 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'number' => 'required|max:5',
+            'number' => [
+                'required',
+                'max:5',
+                // Check if room number exist in the given hotel id
+                Rule::unique('rooms')->where(function ($query) use ($request) {
+                return $query->where('hotel_id', $request->hotel_id);
+                }),
+            ],
             'type' => 'required',
             'price' => 'required|numeric|max:10000',
             'status' => 'required|max:10',
@@ -91,11 +100,17 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         $data = $request->validate([
-            'number' => 'required|max:5',
+            'number' => [
+                'required',
+                'max:5',
+                Rule::unique('rooms')->where(function ($query)  use ($request) {
+                    return $query->where('hotel_id', $request->hotel_id);
+                })->ignore($room->id),
+            ],
             'type' => 'required',
             'price' => 'required|numeric|max:10000',
             'status' => 'required|max:10',
-            'hotel_id' => 'required|exists:hotels,id',
+            'hotel_id' => 'bail|required|exists:hotels,id',
         ]);
 
         $room->update($data);

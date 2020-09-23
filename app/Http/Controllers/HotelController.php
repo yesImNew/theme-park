@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HotelController extends Controller
 {
@@ -81,7 +82,10 @@ class HotelController extends Controller
     public function update(Request $request, Hotel $hotel)
     {
         $data = $request->validate([
-            'name' => 'required|unique:hotels',
+            'name' => [
+                'required',
+                Rule::unique('hotels')->ignore($hotel->id),
+            ],
         ]);
 
         $hotel->update($data);
