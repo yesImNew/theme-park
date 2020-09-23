@@ -31,7 +31,7 @@
       @forelse ($hotel->rooms as $room)
       <div class="p-4 md:w-1/3 md:mb-2 mb-6 flex flex-col text-center items-center">
         <div class="flex-grow border-b-2 py-5 px-8 shadow-b">
-          <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Room {{ str_pad($room->id, 2, '0', STR_PAD_LEFT) }}</h2>
+          <h2 class="text-gray-900 text-lg title-font font-medium mb-3">Room {{ $room->number }}</h2>
           <p class="leading-relaxed text-base">{{ $room->type }}
             <span class="px-2 font-semibold">MVR {{ $room->price }}</span></p>
           <p class="text-left font-thin ">{{ $room->status }}</p>

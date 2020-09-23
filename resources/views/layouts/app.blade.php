@@ -14,7 +14,7 @@
 
   @include('layouts.nav')
 
-  <main>
+  <main class="relative">
     @yield('content')
   </main>
 

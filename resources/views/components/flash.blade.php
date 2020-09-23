@@ -1,8 +1,8 @@
 @if (session()->has($key))
 <div
-  class="border items-center px-4 py-3 rounded fixed bottom-0 right-0 flex {{ 'flash-'.$key }}"
+  class="border items-center px-4 py-3 rounded fixed flex {{ 'flash-'.$key }}"
   role="alert"
-  style="bottom: 2rem; right: 2rem"
+  style="top: 5rem; right: 2rem"
   x-data="{open : true}"
   x-init=" setTimeout(function () { open = false; }, 3000);"
   @hide="open = false"

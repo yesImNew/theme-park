@@ -32,6 +32,7 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
+            'number' => $this->faker->unique()->regexify('[G1-9]0[1-9]'),
             'type' => collect($this->roomTypes)->random(),
             'price' => $this->faker->randomFloat(2, 50, 1000),
             'hotel_id' => Hotel::factory(),

@@ -15,14 +15,4 @@ class Room extends Model
     {
         return $this->belongsTo(Hotel::class);
     }
-
-    /**
-    * Get the user's full name.
-    *
-    * @return string
-    */
-    public function getNumberAttribute()
-    {
-        return str_pad($this->id, 2, '0', STR_PAD_LEFT);
-    }
 }

@@ -30,7 +30,7 @@
           @forelse ($rooms as $room)
           <tr class="border-b">
             <td class="px-4 py-2">
-              <a href="{{ route('rooms.edit', $room) }}" class="hover:underline"> {{ str_pad($room->id, 2, '0', STR_PAD_LEFT) }}</a>
+              <a href="{{ route('rooms.edit', $room) }}" class="hover:underline"> {{ $room->number }}</a>
             </td>
 
             <td class="px-4 py-2">{{ $room->type }}</td>
