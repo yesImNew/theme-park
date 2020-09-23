@@ -638,6 +638,10 @@ video {
   color: rgba(197, 48, 48, var(--text-opacity));
 }
 
+.shadow-b {
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

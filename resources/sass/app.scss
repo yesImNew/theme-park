@@ -15,4 +15,10 @@
     @apply text-red-700;
 }
 
+.shadow-b {
+    -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+}
+
 @import "tailwindcss/utilities";

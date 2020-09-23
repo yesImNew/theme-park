@@ -38,11 +38,12 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:hotels',
         ]);
 
-        Hotel::create($data);
-        return redirect()->route('hotels.index')
+        $hotel = Hotel::create($data);
+
+        return redirect()->route('hotels.show', $hotel)
             ->with('success', ['Created', 'New hotel created']);
     }
 
@@ -54,7 +55,9 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        //
+        $hotel->load('rooms');
+
+        return view('hotel.show', compact('hotel'));
     }
 
     /**
@@ -78,11 +81,11 @@ class HotelController extends Controller
     public function update(Request $request, Hotel $hotel)
     {
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:hotels',
         ]);
 
         $hotel->update($data);
-        return redirect()->route('hotels.index')
+        return redirect()->route('hotels.show', $hotel)
             ->with('success', ['Updated', 'Hotel details updated']);
     }
 

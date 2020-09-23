@@ -23,10 +23,10 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($hotels as $hotel)
+          @forelse ($hotels as $hotel)
           <tr class="border-b">
             <td class="px-4 py-2">
-              <a href="{{ route('hotels.edit', $hotel) }}" class="hover:underline"> {{ $hotel->name }}</a>
+              <a href="{{ route('hotels.show', $hotel) }}" class="hover:underline"> {{ $hotel->name }}</a>
             </td>
 
             <td class="px-4 py-2 text-center">
@@ -40,7 +40,14 @@
               </form>
             </td>
           </tr>
-          @endforeach
+          @empty
+          <tr class="border-b">
+            <td class="px-4 py-2 text-gray-800 font-thin italic" colspan="3">
+              No hotels to show
+            </td>
+          </tr>
+
+          @endforelse
         </tbody>
       </table>
 
