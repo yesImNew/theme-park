@@ -104,6 +104,6 @@ class HotelController extends Controller
         $hotel->delete();
 
         return redirect()->route('hotels.index')
-            ->with('danger', ['Deleted' , 'Hotel deleted']);;
+            ->with('danger', ['Deleted' , 'Hotel deleted']);
     }
 }

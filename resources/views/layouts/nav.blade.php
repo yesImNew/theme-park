@@ -8,11 +8,11 @@
       <span class="ml-3 text-xl">{{ config('app.name') }}</span>
     </a>
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 {{ Request::is('/') ? 'text-blue-500' : 'hover:text-gray-900' }}" href="{{ route('home') }}">Home</a>
-      <a class="mr-5 {{ Request::is('customers*') ? 'text-blue-500' : 'hover:text-gray-900' }}">Customers</a>
-      <a class="mr-5 {{ Request::is('hotels*') ? 'text-blue-500' : 'hover:text-gray-900' }}" href="{{ route('hotels.index') }}">Hotels</a>
-      <a class="mr-5 {{ Request::is('rooms*') ? 'text-blue-500' : 'hover:text-gray-900' }}" href="{{ route('rooms.index') }}">Rooms</a>
-      <a class="mr-5 hover:text-gray-900">Activities</a>
+      <a class="mr-5 focus:outline-none {{ Request::is('/') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('home') }}">Home</a>
+      <a class="mr-5 focus:outline-none {{ Request::is('customers*') ? 'text-blue-500' : 'hover:text-gray-900'}}"  href="{{ route('customers.index') }}">Customers</a>
+      <a class="mr-5 focus:outline-none {{ Request::is('hotels*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotels.index') }}">Hotels</a>
+      <a class="mr-5 focus:outline-none {{ Request::is('rooms*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('rooms.index') }}">Rooms</a>
+      <a class="mr-5 focus:outline-none hover:text-gray-900">Activities</a>
     </nav>
     <button class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
       Register
