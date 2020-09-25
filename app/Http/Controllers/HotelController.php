@@ -56,7 +56,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        $hotel->load('rooms');
+        $hotel->load('rooms', 'bookings');
 
         return view('hotel.show', compact('hotel'));
     }

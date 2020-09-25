@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingRecordController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
@@ -25,4 +26,5 @@ Route::resources([
     'hotels' => HotelController::class,
     'rooms' => RoomController::class,
     'customers' => CustomerController::class,
+    'bookings' => BookingRecordController::class,
 ]);
