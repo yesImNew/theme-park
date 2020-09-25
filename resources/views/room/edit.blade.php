@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Hotels')
+@section('title', 'Rooms')
 
 @section('content')
 <section class="text-gray-700 body-font">
