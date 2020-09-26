@@ -8,6 +8,7 @@
   <title>{{ config('app.name') }} - @yield('title')</title>
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ mix('css/flatpickr.css') }}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body class="bg-gray-100">

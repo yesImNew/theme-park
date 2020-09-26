@@ -642,6 +642,43 @@ video {
   box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
 }
 
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+  cursor: not-allowed;
+  color: #6e2a2a;
+  background-color: #ffe8e8;
+  border-radius: 0;
+  border-color: #ffe8e8;
+  box-shadow: -5px 0 0 #ffe8e8, 5px 0 0 #ffe8e8;
+}
+
+.nextMonthDay {
+  visibility: hidden;
+}
+
+.nextMonthDay:nth-last-child(-n+7) {
+  display: none;
+}
+
+.prevMonthDay {
+  visibility: hidden;
+}
+
+.flatpickr-current-month span.cur-month {
+  font-weight: normal;
+}
+
+.flatpickr-day.inRange {
+  border-radius: 0;
+  box-shadow: -5px 0 0 #aed2ff, 5px 0 0 #aed2ff;
+  background: #aed2ff;
+  border-color: #aed2ff;
+}
+
+.flatpickr-day.today {
+  border-color: #aed2ff;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

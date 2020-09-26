@@ -24,7 +24,7 @@ class BookingRecordController extends Controller
      */
     public function create()
     {
-        //
+        return view('booking.create');
     }
 
     /**
@@ -35,7 +35,9 @@ class BookingRecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required'
+        ]);
     }
 
     /**
