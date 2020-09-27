@@ -24,3 +24,4 @@ mix.js('resources/js/app.js', 'public/js')
         processCssUrls: false,
         postCss: [tailwindcss('./tailwind.config.js')],
     })
+    .stylus('node_modules/flatpickr/src/style/flatpickr.styl', 'public/css')

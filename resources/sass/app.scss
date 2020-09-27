@@ -2,4 +2,72 @@
 
 @import "tailwindcss/components";
 
+// Flash styles
+.flash-success {
+    @apply bg-green-100;
+    @apply border-green-400;
+    @apply text-green-700;
+}
+
+.flash-danger {
+    @apply bg-red-100;
+    @apply border-red-400;
+    @apply text-red-700;
+}
+
+.shadow-b {
+    -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
+}
+
+// flatpickr overrides
+$inrange-color: #aed2ff;
+// $disabled-bg-color: #fdc1c1;
+$disabled-bg-color: #ffe8e8;
+$disabled-color: #6e2a2a;
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    cursor: not-allowed;
+    color: $disabled-color;
+    background-color: $disabled-bg-color;
+    border-radius: 0;
+    border-color: $disabled-bg-color;
+    -webkit-box-shadow: -5px 0 0 $disabled-bg-color,
+        5px 0 0 $disabled-bg-color;
+    box-shadow: -5px 0 0 $disabled-bg-color,
+        5px 0 0 $disabled-bg-color;
+}
+
+.nextMonthDay {
+    visibility: hidden;
+
+    &:nth-last-child(-n+7) {
+        display: none;
+    }
+}
+
+.prevMonthDay {
+    visibility: hidden;
+}
+
+.flatpickr-current-month span.cur-month {
+    font-weight: normal;
+}
+
+.flatpickr-day.inRange {
+    border-radius: 0;
+    -webkit-box-shadow: -5px 0 0 $inrange-color, 5px 0 0 $inrange-color;
+    box-shadow: -5px 0 0 $inrange-color, 5px 0 0 $inrange-color;
+    background: $inrange-color;
+    border-color: $inrange-color;
+}
+
+.flatpickr-day.today {
+    border-color: $inrange-color;
+}
+
+
+
 @import "tailwindcss/utilities";
