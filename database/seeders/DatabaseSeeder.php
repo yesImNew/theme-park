@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             CustomerSeeder::class,
             BookingRecordSeeder::class,
+            ActivitySeeder::class,
         ]);
     }
 }
