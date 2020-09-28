@@ -5,7 +5,8 @@ use App\Http\Controllers\BookingRecordController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
-
+use App\Http\Controllers\RoomTypeController;
+use Database\Seeders\RoomTypeSeeder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,5 @@ Route::resources([
     'customers' => CustomerController::class,
     'bookings' => BookingRecordController::class,
     'activities' => ActivityController::class,
+    'room-types' => RoomTypeController::class,
 ]);

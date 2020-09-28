@@ -130,6 +130,6 @@ class RoomController extends Controller
         $room->delete();
 
         return redirect()->back()
-            ->with('danger', ['Deleted' , 'Room deleted']);;
+            ->with('danger', ['Deleted' , 'Room deleted']);
     }
 }

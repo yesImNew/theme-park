@@ -10,8 +10,11 @@
     </div>
 
     <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
-      <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700"
+      <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700 mr-5"
         href="{{ route('rooms.create') }}">Create New</a>
+
+      <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700"
+        href="{{ route('room-types.index') }}">Room types</a>
     </div>
 
     <div class="lg:w-3/4 w-full mx-auto overflow-auto bg-white shadow-md rounded">
