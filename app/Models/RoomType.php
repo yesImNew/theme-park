@@ -15,4 +15,9 @@ class RoomType extends Model
     {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

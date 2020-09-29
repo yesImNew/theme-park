@@ -36,7 +36,7 @@
               <a href="{{ route('rooms.edit', $room) }}" class="hover:underline"> {{ $room->number }}</a>
             </td>
 
-            <td class="px-4 py-2">{{ $room->type }}</td>
+            <td class="px-4 py-2">{{ $room->type->name }}</td>
             <td class="px-4 py-2">{{ $room->price }}</td>
             <td class="px-4 py-2 hidden sm:table-cell">{{ $room->hotel->name }}</td>
             <td class="px-4 py-2">{{ $room->status }}</td>
