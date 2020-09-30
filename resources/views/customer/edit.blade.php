@@ -13,14 +13,14 @@
       @csrf @method('PATCH')
 
       <div class="flex flex-wrap mb-6 w-full">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="name"> Customer Name </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border {{ $errors->has('name') ? 'border-red-500' : '' }}
+            for="nid"> Customer ID </label>
+          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border {{ $errors->has('nid') ? 'border-red-500' : '' }}
             rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="text" name="name" placeholder="Customer name" value="{{ old('name', $customer->name) }}">
+            type="text" name="nid" placeholder="A000000" value="{{ old('nid', $customer->nid) }}">
 
-          @error('name') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
+          @error('nid') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
 
         <div class="w-full md:w-1/2 px-3">
@@ -38,6 +38,18 @@
               value="{{ old('phone_no', $customer->getAttributes()['phone_no']) }}"> <!-- Skip the accesor -->
           </div>
           @error('phone_no') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
+        </div>
+      </div>
+
+      <div class="flex flex-wrap mb-6 w-full">
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="name"> Customer Name </label>
+          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border {{ $errors->has('name') ? 'border-red-500' : '' }}
+            rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="text" name="name" placeholder="Customer name" value="{{ old('name', $customer->name) }}">
+
+          @error('name') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
       </div>
 

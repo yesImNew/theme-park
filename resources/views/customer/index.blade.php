@@ -18,7 +18,8 @@
       <table class="table-auto w-full text-left whitespace-no-wrap">
         <thead>
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl">Name</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl">Customer ID</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Name</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Phone number</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center">Actions</th>
           </tr>
@@ -27,8 +28,10 @@
           @forelse ($customers as $customer)
           <tr class="border-b">
             <td class="px-4 py-2">
-              <a href="{{ route('customers.show', $customer) }}" class="hover:underline"> {{ $customer->name }}</a>
+              <a href="{{ route('customers.show', $customer) }}" class="hover:underline"> {{ $customer->nid }}</a>
             </td>
+
+            <td class="px-4 py-2">{{ $customer->name }}</td>
 
             <td class="px-4 py-2">{{ $customer->phone_no }}</td>
 

@@ -23,6 +23,7 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
+            'nid' => $this->faker->regexify('A[0-9]{6}'),
             'name' => $this->faker->firstName,
             'phone_no' => $this->faker->unique()->numberBetween(7000000, 7999999),
             // 'phone_no' => $this->faker->regexify('\+960 [79][0-9]{2}-[0-9]{4}'),
