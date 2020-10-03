@@ -3,10 +3,12 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BookingRecordController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
-use Database\Seeders\RoomTypeSeeder;
+use App\Http\Controllers\ScheduledEventController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::resources([
     'hotels' => HotelController::class,
@@ -31,4 +31,5 @@ Route::resources([
     'bookings' => BookingRecordController::class,
     'activities' => ActivityController::class,
     'room-types' => RoomTypeController::class,
+    'scheduled-events' => ScheduledEventController::class,
 ]);

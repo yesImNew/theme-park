@@ -21,6 +21,40 @@
     box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.05);
 }
 
+.event {
+    &:first-child {
+        @apply pt-10;
+    }
+
+    &:last-child {
+        @apply pb-10;
+    }
+}
+
+.form-input {
+    @apply appearance-none;
+    @apply block;
+    @apply w-full;
+    @apply bg-gray-200;
+    @apply text-gray-700;
+    @apply border;
+    @apply rounded;
+    @apply py-3;
+    @apply px-4;
+    @apply mb-3;
+    @apply leading-tight;
+
+    &:hover {
+        @apply border-gray-600;
+    }
+
+    &:focus {
+        @apply outline-none;
+        @apply bg-white;
+        @apply border-gray-600;
+    }
+}
+
 // flatpickr overrides
 $inrange-color: #aed2ff;
 // $disabled-bg-color: #fdc1c1;

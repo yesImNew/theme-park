@@ -10,6 +10,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ mix('css/flatpickr.css') }}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+  <style> html { scroll-behavior: smooth; } </style>
 </head>
 <body class="bg-gray-100">
 
