@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\ScheduledEvents;
+use App\Models\ScheduledEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ScheduledEventsFactory extends Factory
+class ScheduledEventFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ScheduledEvents::class;
+    protected $model = ScheduledEvent::class;
 
     /**
      * Define the model's default state.

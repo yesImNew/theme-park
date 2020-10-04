@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             // BookingRecordSeeder::class,
             ActivitySeeder::class,
-            ScheduledEventsSeeder::class,
+            ScheduledEventSeeder::class,
         ]);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ScheduledEvents;
+use App\Models\ScheduledEvent;
 use Illuminate\Database\Seeder;
 
-class ScheduledEventsSeeder extends Seeder
+class ScheduledEventSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ScheduledEventsSeeder extends Seeder
      */
     public function run()
     {
-        ScheduledEvents::factory()
+        ScheduledEvent::factory()
             ->count(5)
             ->create();
     }

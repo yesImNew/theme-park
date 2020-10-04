@@ -37,7 +37,7 @@ class RoomFactory extends Factory
             'number' => $this->faker->unique()->regexify('[G1-9]0[1-9]'),
             'room_type_id' => RoomType::all()->random(),
             'price' => $this->faker->randomFloat(2, 50, 1000),
-            'hotel_id' => Hotel::factory(),
+            'hotel_id' => Hotel::all()->random(),
             'status' => 'available'
         ];
     }

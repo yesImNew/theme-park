@@ -34,7 +34,7 @@
           </div>
           <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
             <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">
-              {{ $event->title }}
+              <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline">{{ $event->title }}</a>
               <span class="px-4 text-sm text-red-500">
                 @if (round(((($event->date - strtotime('now'))/24)/60)/60) < 15)
                   {{ round(((($event->date - strtotime('now'))/24)/60)/60) }} days left
