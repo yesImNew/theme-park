@@ -29,6 +29,17 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
+        // Check if there is atleast one room type and one hotel
+        if (!RoomType::first())  {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'You need to create atleast one room type']);
+        }
+        elseif (!Hotel::first()) {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'You need to create atleast one hotel']);
+        }
+
+        // Select hotel by default if redirected from hotel show
         $selected = '';
         if ($request->has('hotel')) { $selected = $request->hotel; }
 
@@ -57,7 +68,7 @@ class RoomController extends Controller
             ],
             'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|numeric|max:10000',
-            'status' => 'required|max:10',
+            // 'status' => 'required|max:10',
             'hotel_id' => 'required|exists:hotels,id',
         ]);
 
@@ -111,7 +122,6 @@ class RoomController extends Controller
             ],
             'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|numeric|max:10000',
-            'status' => 'required|max:10',
             'hotel_id' => 'bail|required|exists:hotels,id',
         ]);
 

@@ -57,10 +57,10 @@
       @endforelse
     </div>
 
-    <div class="text-center py-12">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 mb-4">Hotel booking records</h1>
+    <div class="py-12 lg:w-3/4 w-full mx-auto ">
+      <h1 class="sm:text-xl text-lg font-medium title-font text-gray-900 mb-4">Hotel booking records</h1>
 
-      <div class="lg:w-3/4 w-full mx-auto overflow-auto bg-white shadow-md rounded">
+      <div class="overflow-auto bg-white shadow-md rounded">
         <table class="table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr>
@@ -87,16 +87,6 @@
               <td class="px-4 py-2">{{ $booking->price }}</td>
               <td class="px-4 py-2">{{ $booking->start }}</td>
               <td class="px-4 py-2">{{ $booking->end }}</td>
-
-              <!-- Actions -->
-              {{-- <td class="px-4 py-2 justify-center hidden md:flex">
-                <a href="{{ route('rooms.edit', $room) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
-
-                <form action="{{ route('rooms.destroy', $room) }}" method="POST">
-                  @csrf @method('DELETE')
-                  <button type="submit" class="px-4 py-1 rounded border border-red-500 hover:bg-red-400 hover:text-gray-100">Delete</button>
-                </form>
-              </td> --}}
             </tr>
             @empty
             <tr class="border-b">

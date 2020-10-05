@@ -38,7 +38,7 @@ class RoomFactory extends Factory
             'room_type_id' => RoomType::all()->random(),
             'price' => $this->faker->randomFloat(2, 50, 1000),
             'hotel_id' => Hotel::all()->random(),
-            'status' => 'available'
+            // 'status' => 'available'
         ];
     }
 }

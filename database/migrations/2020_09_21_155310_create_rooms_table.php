@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->foreignId('room_type_id')->constrained();
             $table->decimal('price');
             $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
-            $table->string('status', 10);
+            $table->string('status', 10)->default('available');
             $table->timestamps();
         });
     }

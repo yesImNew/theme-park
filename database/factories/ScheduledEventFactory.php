@@ -23,7 +23,7 @@ class ScheduledEventFactory extends Factory
     public function definition()
     {
         return [
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween('now', '+3 months')->format('Y-m-d'),
             'title' => $this->faker->words(3, true),
             'comments' => $this->faker->realText(80, 1),
         ];
