@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            // HotelSeeder::class,
+            RoomTypeSeeder::class,
+            RoomSeeder::class,
+            CustomerSeeder::class,
+            // BookingRecordSeeder::class,
+            ActivitySeeder::class,
+            ScheduledEventSeeder::class,
+        ]);
     }
 }
