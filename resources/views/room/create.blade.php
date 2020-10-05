@@ -15,8 +15,7 @@
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="number"> Room Number </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border {{ $errors->has('number') ? 'border-red-500' : '' }}
-            rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          <input class="form-input {{ $errors->has('number') ? 'border-red-500' : '' }}"
             type="text" name="number" placeholder="101" value="{{ old('number') }}">
 
           @error('number') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
@@ -26,7 +25,7 @@
         <div class="w-full md:w-1/2 px-3">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">Room Type</label>
           <div class="relative">
-            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            <select class="form-input cursor-pointer"
              name="room_type_id">
               @foreach ($types as $key => $type)
                 <option value="{{ $key }}"  {{ old('room_type_id') == $key ? 'selected' : '' }}>{{ $type }}</option>
@@ -44,8 +43,7 @@
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="price"> Room Price </label>
-          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border {{ $errors->has('price') ? 'border-red-500' : '' }}
-            rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          <input class="form-input {{ $errors->has('price') ? 'border-red-500' : '' }}"
             type="text" name="price" placeholder="MVR 0.00" value="{{ old('price') }}">
 
           @error('price') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
@@ -54,7 +52,7 @@
         <div class="w-full md:w-1/2 px-3">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">Hotel</label>
           <div class="relative">
-            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            <select class="form-input cursor-pointer"
              name="hotel_id">
               @foreach ($hotels as  $key => $hotel)
                 <option value="{{ $key }}"  {{ old('hotel_id', $selected) == $key ? 'selected' : '' }}>{{ $hotel }}</option>
@@ -70,7 +68,7 @@
       <div class="flex items-center pt-4 px-3">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">Create</button>
         <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
-          href="{{ url()->previous() == url()->current() ? route('rooms.index') : url()->previous() }}">Back</a>
+          href="{{ url()->previous() == url()->full() ? route('rooms.index') : url()->previous() }}">Back</a>
       </div>
 
     </form>
