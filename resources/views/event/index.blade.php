@@ -30,7 +30,7 @@
               <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline"> {{ $event->title }}</a>
             </td>
 
-            <td class="px-4 py-2">{{ date('jS M Y', $event->date) }}</td>
+            <td class="px-4 py-2">{{ $event->date->toFormattedDateString() }}</td>
 
             <td class="px-4 py-2 text-center">
               <a href="{{ route('scheduled-events.edit', $event) }}" class="px-4 py-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
@@ -83,7 +83,7 @@
               <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline"> {{ $event->title }}</a>
             </td>
 
-            <td class="px-4 py-2">{{ date('jS M Y', $event->date) }}</td>
+            <td class="px-4 py-2">{{ $event->date->toFormattedDateString() }}</td>
 
             <td class="px-4 py-2 whitespace-normal">{{ $event->comments }}</td>
           </tr>

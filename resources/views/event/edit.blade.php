@@ -24,7 +24,7 @@
         <div class="w-full md:w-1/2 px-3">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="date"> Date </label>
-          <x-datepicker name="date" :default="date('Y-m-d', $event->date)" />
+          <x-datepicker name="date" :default="$event->date" />
 
           @error('date') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="flex items-center pt-4 px-3">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">Create</button>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">Update</button>
       <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
         href="{{ url()->previous() == url()->current() ? route('activities.index') : url()->previous() }}">Back</a>
       </div>

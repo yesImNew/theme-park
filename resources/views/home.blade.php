@@ -28,24 +28,24 @@
         </div>
         <div class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-blue-500 text-white relative z-10 title-font font-medium text-sm">{{ $loop->index + 1 }}</div>
         <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-          <div class="flex-shrink-0 w-24 h-24 bg-blue-100 text-blue-500 font-semibold shadow rounded-full inline-flex items-center justify-center text-center">
-            {{ date('jS M', $event->date) }} <br>
-            {{ date('Y', $event->date) }}
+          <div class="flex-shrink-0 w-24 h-24 bg-gray-200 border border-blue-500 text-blue-500 font-semibold shadow rounded-full inline-flex items-center justify-center text-center">
+            {{ $event->date->format('jS M') }} <br> {{ $event->date->year }}
+            <br>
           </div>
           <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
             <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">
               <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline">{{ $event->title }}</a>
               <span class="px-4 text-sm text-red-500">
-                @if (round(((($event->date - strtotime('now'))/24)/60)/60) < 15)
-                  {{ round(((($event->date - strtotime('now'))/24)/60)/60) }} days left
+                @if ($event->date->diffInDays(now()) < 15)
+                  {{ $event->date->diffForHumans() }}
                 @endif
               </span>
             </h2>
 
             <p class="leading-relaxed mb-2">{{ $event->comments }}</p>
 
-            <a class="text-blue-500 hover:text-blue-600 inline-flex items-center" href="{{ route('bookings.create', ['event' =>$event]) }}">
-              Book a room
+            <a class="text-blue-500 hover:text-blue-600 inline-flex items-center" href="{{ route('hotel.booking', ['event' => $event]) }}">
+              Book a hotel
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>

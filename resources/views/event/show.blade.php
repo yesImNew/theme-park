@@ -7,7 +7,7 @@
     <div class="text-center mb-20 ">
       <div class="flex flex-wrap justify-center mb-4">
         <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 px-2">{{ $event->title}}</h1>
-        <h1 class="sm:text-xl sm:mb-1 text-lg font-medium title-font text-gray-700 px-2 self-end">{{ date('jS M Y', $event->date) }}</h1>
+        <h1 class="sm:text-xl sm:mb-1 text-lg font-medium title-font text-gray-700 px-2 self-end">{{ $event->date->toFormattedDateString() }}</h1>
       </div>
 
       <div class="text-center my-5">
