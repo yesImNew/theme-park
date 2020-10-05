@@ -24,12 +24,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::resources([
-    'hotels' => HotelController::class,
-    'rooms' => RoomController::class,
-    'customers' => CustomerController::class,
-    'bookings' => BookingRecordController::class,
-    'activities' => ActivityController::class,
-    'room-types' => RoomTypeController::class,
-    'scheduled-events' => ScheduledEventController::class,
-]);
+Route::middleware('auth')->group(function () {
+    Route::resources([
+        'hotels' => HotelController::class,
+        'rooms' => RoomController::class,
+        'customers' => CustomerController::class,
+        'bookings' => BookingRecordController::class,
+        'activities' => ActivityController::class,
+        'room-types' => RoomTypeController::class,
+        'scheduled-events' => ScheduledEventController::class,
+    ]);
+});

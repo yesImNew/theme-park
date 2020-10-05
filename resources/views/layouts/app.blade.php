@@ -21,7 +21,7 @@
     @yield('content')
   </main>
 
-  @include('layouts.footer')
+  {{-- @include('layouts.footer') --}}
 
   <!-- Flash Messages -->
   <x-flash key="success" />
