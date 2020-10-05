@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\Hotel;
-
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -17,7 +17,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::paginate(10);
+        $rooms = Room::with('type')->paginate(10);
 
         return view('room.index', compact('rooms'));
     }
@@ -29,12 +29,24 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
+        // Check if there is atleast one room type and one hotel
+        if (!RoomType::first())  {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'You need to create atleast one room type']);
+        }
+        elseif (!Hotel::first()) {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'You need to create atleast one hotel']);
+        }
+
+        // Select hotel by default if redirected from hotel show
         $selected = '';
         if ($request->has('hotel')) { $selected = $request->hotel; }
 
         $hotels = Hotel::all()->pluck('name', 'id');
+        $types = RoomType::all()->pluck('name', 'id');
 
-        return view('room.create', compact('hotels', 'selected'));
+        return view('room.create', compact('hotels', 'types', 'selected'));
     }
 
     /**
@@ -51,12 +63,12 @@ class RoomController extends Controller
                 'max:5',
                 // Check if room number exist in the given hotel id
                 Rule::unique('rooms')->where(function ($query) use ($request) {
-                return $query->where('hotel_id', $request->hotel_id);
+                    return $query->where('hotel_id', $request->hotel_id);
                 }),
             ],
-            'type' => 'required',
+            'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|numeric|max:10000',
-            'status' => 'required|max:10',
+            // 'status' => 'required|max:10',
             'hotel_id' => 'required|exists:hotels,id',
         ]);
 
@@ -86,8 +98,9 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         $hotels = Hotel::all()->pluck('name', 'id');
+        $types = RoomType::all()->pluck('name', 'id');
 
-        return view('room.edit', compact('room', 'hotels'));
+        return view('room.edit', compact('room', 'types', 'hotels'));
     }
 
     /**
@@ -107,9 +120,8 @@ class RoomController extends Controller
                     return $query->where('hotel_id', $request->hotel_id);
                 })->ignore($room->id),
             ],
-            'type' => 'required',
+            'room_type_id' => 'required|exists:room_types,id',
             'price' => 'required|numeric|max:10000',
-            'status' => 'required|max:10',
             'hotel_id' => 'bail|required|exists:hotels,id',
         ]);
 
@@ -130,6 +142,6 @@ class RoomController extends Controller
         $room->delete();
 
         return redirect()->back()
-            ->with('danger', ['Deleted' , 'Room deleted']);;
+            ->with('danger', ['Deleted' , 'Room deleted']);
     }
 }

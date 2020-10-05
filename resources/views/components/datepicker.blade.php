@@ -1,26 +1,19 @@
 <div class="relative">
 
   <input type="text" name="{{ $name }}"
-    class="appearance-none block w-full bg-gray-200 text-gray-700 border
-    hover:border-gray-600 {{ $errors->has('from') ? 'border-red-500' : '' }}
-    rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white cursor-pointer"
-    placeholder="Choose a date or a range"
+    class="form-input cursor-pointer {{ $errors->has($name) ? 'border-red-500' : '' }}"
+    placeholder="Choose a date"
     x-data="{}"
     x-init="
       flatpickr($el, {
         altInput: true,
         altFormat: 'M j, Y',
         dateFormat: 'Y-m-d',
+        defaultDate: '{{ $default ?? '' }}',
         minDate: 'today',
-        mode: 'range',
+        mode: '{{ $mode ?? 'single' }}',
         monthSelectorType: 'static',
         maxDate: new Date().fp_incr(90),
-        disable: [
-          {
-              from: '2020-10-05',
-              to: '2020-10-07'
-          },
-        ],
       });
     "
     value=""

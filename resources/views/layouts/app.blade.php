@@ -10,6 +10,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ mix('css/flatpickr.css') }}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+  <style> html { scroll-behavior: smooth; } </style>
 </head>
 <body class="bg-gray-100">
 
@@ -19,11 +21,12 @@
     @yield('content')
   </main>
 
-  {{-- @include('layouts.footer') --}}
+  @include('layouts.footer')
 
   <!-- Flash Messages -->
   <x-flash key="success" />
   <x-flash key="danger" />
+  <x-flash key="warning" />
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}"></script>

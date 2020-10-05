@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class RoomType extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function hotel()
+    public function getNumberAttribute()
     {
-        return $this->belongsTo(Hotel::class);
+        return str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
 
-    public function type()
+    public function rooms()
     {
-        return $this->belongsTo(RoomType::class, 'room_type_id');
+        return $this->hasMany(Room::class);
     }
 }

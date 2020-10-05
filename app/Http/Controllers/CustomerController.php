@@ -39,6 +39,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'nid' => 'required|alpha_num|max:10|unique:customers',
             'name' => 'required|max:30',
             'phone_no' => 'required|unique:customers|numeric|starts_with:9,7|digits:7',
         ]);
@@ -82,11 +83,11 @@ class CustomerController extends Controller
     {
         // Validate
         $data = $request->validate([
+            'nid' => ['required', 'alpha_num', 'max:10',
+                Rule::unique('customers')->ignore($customer->id)],
             'name' => 'required|max:30',
-            'phone_no' => [
-                'required', 'numeric', 'starts_with:9,7', 'digits:7',
-                Rule::unique('customers')->ignore($customer->id)
-            ],
+            'phone_no' => ['required', 'numeric', 'starts_with:9,7', 'digits:7',
+                Rule::unique('customers')->ignore($customer->id)],
         ]);
 
         $customer->update($data);

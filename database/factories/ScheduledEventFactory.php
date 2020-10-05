@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Customer;
+use App\Models\ScheduledEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class CustomerFactory extends Factory
+class ScheduledEventFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Customer::class;
+    protected $model = ScheduledEvent::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,9 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'nid' => $this->faker->regexify('A[0-9]{6}'),
-            'name' => $this->faker->firstName,
-            'phone_no' => $this->faker->unique()->numberBetween(7000000, 7999999),
+            'date' => $this->faker->dateTimeBetween('now', '+3 months')->format('Y-m-d'),
+            'title' => $this->faker->words(3, true),
+            'comments' => $this->faker->realText(80, 1),
         ];
     }
 }

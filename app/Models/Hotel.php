@@ -20,4 +20,12 @@ class Hotel extends Model
     {
         return $this->hasMany(BookingRecord::class);
     }
+
+     /**
+     * Get the hotel's image.
+     */
+     public function image()
+     {
+        return $this->morphOne('App\Models\Image', 'imageable');
+     }
 }

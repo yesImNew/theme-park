@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hotel;
+use App\Models\ScheduledEvent;
 use Illuminate\Database\Seeder;
 
-class RoomSeeder extends Seeder
+class ScheduledEventSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,8 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-        Hotel::factory()
-            ->times(3)
-            ->hasRooms(5)
+        ScheduledEvent::factory()
+            ->count(5)
             ->create();
     }
 }
