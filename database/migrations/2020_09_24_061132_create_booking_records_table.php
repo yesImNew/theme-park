@@ -16,13 +16,10 @@ class CreateBookingRecordsTable extends Migration
         Schema::create('booking_records', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
-            $table->date('start');
-            $table->date('end');
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('scheduled_event_id')->constrained()->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
-            $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
-            $table->string('room_type');
             $table->decimal('price');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

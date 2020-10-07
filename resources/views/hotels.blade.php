@@ -3,56 +3,61 @@
 
 @section('content')
 <section class="text-gray-700 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-wrap">
-    <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom.</p>
+  <div class="container px-5 py-12 mx-auto">
+    <div class="flex flex-col text-center w-full mb-10">
+      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Book a Hotel</h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
     </div>
 
-    <div class="lg:w-2/3 mx-auto">
-      <div class="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
-        <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/820x340">
-        <div class="text-center relative z-10 w-full">
-          <h2 class="text-2xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-          <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-          <a class="mt-3 text-blue-500 inline-flex items-center">Learn More
+    <div class="lg:w-2/3 w-full mx-auto rounded">
+      <!-- Hotel card -->
+      @foreach ($hotels as $hotel)
+      <a class="flex mb-5 shadow bg-white rounded-md mx-4 md:mx-auto max-w-md md:max-w-5xl group
+        transform hover:-translate-y-2 hover:-translate-x-2 hover:shadow-lg transition duration-300 ease-out"
+        href="{{ route('hotels.show', $hotel) }}"
+      >
+        <div class="p-6 w-full">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-gray-900 -mt-1 transition-colors duration-150">{{ $hotel->name }}</h2>
+
+            <!-- Rating -->
+            <span class="flex items-center">
+              @for ($i = 1; $i <= rand(2, 5); $i++)
+              <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              @endfor
+
+              @while ($i++ <= 5)
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              @endwhile
+              <span class="text-gray-600 ml-3">{{ rand(1, 20) }} Reviews</span>
+            </span>
+          </div>
+          <p class="mt-3 text-gray-700 text-sm">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt tempora corrupti consequatur maiores molestias placeat quis, totam molestiae unde sapiente? In officiis maxime molestias numquam expedita dicta quam quaerat molestiae!
+          </p>
+
+          <p class="mt-4 text-blue-500 group-hover:text-blue-600 inline-flex items-center">
+            Details
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
-          </a>
+          </p>
         </div>
-      </div>
-      <div class="flex flex-wrap -mx-2">
-        <div class="px-2 w-1/2">
-          <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x460">
-            <div class="text-center relative z-10 w-full">
-              <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-              <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-              <a class="mt-3 text-blue-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="px-2 w-1/2">
-          <div class="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-            <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/542x420">
-            <div class="text-center relative z-10 w-full">
-              <h2 class="text-xl text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
-              <p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
-              <a class="mt-3 text-blue-500 inline-flex items-center">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      </a>
+      @endforeach
+
     </div>
+
+    {{-- <div class="lg:w-2/3 w-full mx-auto my-2">
+      {{ $hotels->links() }}
+    </div> --}}
+
   </div>
+
 </section>
+
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ScheduledEvent;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ScheduledEventController extends Controller
 {
@@ -14,11 +15,11 @@ class ScheduledEventController extends Controller
      */
     public function index()
     {
-        $events = ScheduledEvent::where('date', '>=', now())
+        $events = ScheduledEvent::where('date', '>=', Carbon::today())
             ->orderBy('date')->paginate(10);
 
         // TODO: allow user to load more
-        $pastEvents = ScheduledEvent::where('date', '<', now())
+        $pastEvents = ScheduledEvent::where('date', '<', Carbon::today())
             ->orderBy('date', 'desc')->get()->take(10);
 
         return view('event.index', compact('events', 'pastEvents'));

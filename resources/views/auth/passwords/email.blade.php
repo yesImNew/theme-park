@@ -21,13 +21,13 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="email">{{ __('E-Mail Address') }}</label>
 
-          <input class="form-input shadow {{ $errors->has('email') ? 'border-red-500' : '' }}"
+          <input class="form-input shadow border-gray-400 {{ $errors->has('email') ? 'border-red-500' : '' }}"
             type="email" name="email" value="{{ old('email') }}">
 
           @error('email') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
 
-        <div class="p-2">
+        <div class="p-2 mx-1">
           <button type="submit" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">
               {{ __('Send Password Reset Link') }}</button>
         </div>

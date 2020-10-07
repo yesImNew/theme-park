@@ -36,7 +36,9 @@
             <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">
               <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline">{{ $event->title }}</a>
               <span class="px-4 text-sm text-red-500">
-                @if ($event->date->diffInDays(now()) < 15)
+                @if ($event->date->diffInDays(now()) == 0)
+                  Ongoing
+                @else
                   {{ $event->date->diffForHumans() }}
                 @endif
               </span>

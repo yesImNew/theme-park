@@ -3,6 +3,7 @@
 
 @section('content')
 <section class="text-gray-700 body-font">
+  <!-- Upcoming / current events -->
   <div class="container px-5 py-12 mx-auto">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Upcoming Events</h1>
@@ -20,7 +21,8 @@
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl">Event Title</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Event date</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center" colspan="2">Actions</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 hidden md:table-cell">Comments</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -32,11 +34,11 @@
 
             <td class="px-4 py-2">{{ $event->date->toFormattedDateString() }}</td>
 
-            <td class="px-4 py-2 text-center">
-              <a href="{{ route('scheduled-events.edit', $event) }}" class="px-4 py-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
-            </td>
+            <td class="px-4 py-2 whitespace-normal hidden md:table-cell">{{ $event->comments }}</td>
 
-            <td class="px-4 py-2 text-center ">
+            <td class="px-4 py-2 justify-center hidden md:flex">
+              <a href="{{ route('scheduled-events.edit', $event) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
+
               <form action="{{ route('scheduled-events.destroy', $event) }}" method="POST">
                 @csrf @method('DELETE')
                 <button type="submit" class="px-4 py-1 rounded border border-red-500 hover:bg-red-400 hover:text-gray-100">Delete</button>
@@ -57,11 +59,11 @@
     <div class="lg:w-2/3 w-full mx-auto my-2">
       {{ $events->links() }}
     </div>
-  </div>
+  </div><!-- Upcoming / current events end -->
 
-  <hr>
-
-  <div class="container px-5 py-12 mx-auto">
+  @if ($pastEvents->count() > 0)
+  <!-- Past events -->
+  <div class="container px-5 py-12 mx-auto  border-t border-gray-400">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Past Events</h1>
       {{-- <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Create edit and delete scheduled events</p> --}}
@@ -73,11 +75,12 @@
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl">Event Title</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Event date</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr w-1/2">Comments</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 hidden md:table-cell">Comments</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
-          @forelse ($pastEvents as $event)
+          @foreach ($pastEvents as $event)
           <tr class="border-b">
             <td class="px-4 py-2 whitespace-normal md:whitespace-no-wrap">
               <a href="{{ route('scheduled-events.show', $event) }}" class="hover:underline"> {{ $event->title }}</a>
@@ -85,20 +88,23 @@
 
             <td class="px-4 py-2">{{ $event->date->toFormattedDateString() }}</td>
 
-            <td class="px-4 py-2 whitespace-normal">{{ $event->comments }}</td>
-          </tr>
-          @empty
-          <tr class="border-b">
-            <td class="px-4 py-2 text-gray-800 font-thin italic" colspan="3">
-              No past events to show
+            <td class="px-4 py-2 whitespace-normal hidden md:table-cell">{{ $event->comments }}</td>
+
+            <td class="px-4 py-2 text-center">
+              <form action="{{ route('scheduled-events.destroy', $event) }}" method="POST">
+                @csrf @method('DELETE')
+                <button type="submit" class="px-4 py-1 rounded border border-red-500 hover:bg-red-400 hover:text-gray-100">Delete</button>
+              </form>
             </td>
           </tr>
-          @endforelse
+          @endforeach
         </tbody>
       </table>
 
     </div>
   </div>
+  @endif
+
 
 </section>
 

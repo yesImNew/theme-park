@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use App\Models\ScheduledEvent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +12,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $events = ScheduledEvent::where('date', '>', now())
+        $events = ScheduledEvent::where('date', '>', Carbon::yesterday())
             ->orderBy('date')
             ->paginate(10);
 
@@ -21,16 +22,12 @@ class HomeController extends Controller
     public function hotels(Request $request)
     {
         if ($request->has('event')) {
-            $event = ScheduledEvent::findOrFail($request->event);
-
-            session(['event' => $event]);
-
-            $hotels = Hotel::all();
-            return view('hotels', compact('hotels'));
+            session(['event' => ScheduledEvent::findOrFail($request->event)]);
         }
 
-        return redirect()->back()
-            ->with('warning', ['Warning', 'You forgot to choose an event']);
+        $hotels = Hotel::all();
+
+        return view('hotels', compact('hotels'));
     }
 
 }

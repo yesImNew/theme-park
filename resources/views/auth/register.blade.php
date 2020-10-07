@@ -10,7 +10,7 @@
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Create an account</p>
     </div>
 
-    <form class="lg:w-1/2 md:w-2/3 mx-auto" method="POST" action="{{ route('register') }}">
+    <form class="lg:w-1/2 md:w-2/3 mx-auto mb-24" method="POST" action="{{ route('register') }}">
       @csrf
       <div class="flex flex-wrap -m-2">
         <!-- Name -->
@@ -18,7 +18,7 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="name">{{ __('Name') }}</label>
 
-          <input class="form-input shadow {{ $errors->has('name') ? 'border-red-500' : '' }}"
+          <input class="form-input shadow border-gray-400 {{ $errors->has('name') ? 'border-red-500' : '' }}"
             type="text" name="name" value="{{ old('name') }}">
 
           @error('name') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
@@ -29,7 +29,7 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="email">{{ __('E-Mail Address') }}</label>
 
-          <input class="form-input shadow {{ $errors->has('email') ? 'border-red-500' : '' }}"
+          <input class="form-input shadow border-gray-400 {{ $errors->has('email') ? 'border-red-500' : '' }}"
             type="email" name="email" value="{{ old('email') }}">
 
           @error('email') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
@@ -40,7 +40,7 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="password">{{ __('Password') }}</label>
 
-          <input class="form-input shadow {{ $errors->has('password') ? 'border-red-500' : '' }}"
+          <input class="form-input shadow border-gray-400 {{ $errors->has('password') ? 'border-red-500' : '' }}"
             type="password" name="password">
 
           @error('password') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
@@ -51,14 +51,14 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="password">{{ __('Confirm Password') }}</label>
 
-          <input class="form-input shadow {{ $errors->has('password') ? 'border-red-500' : '' }}"
+          <input class="form-input shadow border-gray-400 {{ $errors->has('password') ? 'border-red-500' : '' }}"
             type="password" name="password_confirmation">
 
           @error('password_confirmation') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
 
         <!-- Submit -->
-        <div class="p-2 w-full flex justify-between items-center">
+        <div class="p-2 mx-1 w-full flex justify-between items-center">
           <button type="submit" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">{{ __('Register') }}</button>
         </div>
 
@@ -70,7 +70,6 @@
           </a>
         </div>
         @endif
-
       </div>
     </form>
   </div>

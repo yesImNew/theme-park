@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingRecord;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingRecordController extends Controller
 {
@@ -22,9 +24,28 @@ class BookingRecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('booking.create');
+        if ($request->has('room')) {
+            session(['room' => Room::findOrFail($request->room)]);
+
+            return redirect()->route('bookings.create');
+        }
+
+        if (! session()->has('event')) {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'Did you forget to choose an event?']);
+        }
+        elseif (! session()->has('room')) {
+            return redirect()->back()
+                ->with('warning', ['Warning', 'Did you forget to choose a room?']);
+        }
+
+        return view('booking.create')->with([
+            'room' => session('room'),
+            'event' => session('event'),
+        ]);
+
     }
 
     /**
@@ -36,7 +57,7 @@ class BookingRecordController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date' => 'required'
+
         ]);
     }
 
@@ -83,5 +104,11 @@ class BookingRecordController extends Controller
     public function destroy(BookingRecord $bookingRecord)
     {
         //
+    }
+
+    private function makeReference() {
+        $user = str_pad(Auth::id(), 2, rand(0, 9));
+        $string = strtoupper(bin2hex(random_bytes(3)));
+        return $user . $string;
     }
 }
