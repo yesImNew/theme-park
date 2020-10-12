@@ -52,13 +52,9 @@
     </div>
 
     <!-- Image -->
-    <div class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0
-      {{ isset($hotel->image) ? 'shadow-lg' : '' }}"
-    >
-      @isset($hotel->image)
+    <div class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0 shadow-lg" style="max-height: 50vh">
         <img class="object-cover object-center w-full h-full"
-          src="{{ $hotel->image->url }}" alt="Hotel image">
-      @endisset
+          src="{{ $hotel->image->url ?? asset('img/hotel_placeholder' . rand(1,3). '.svg') }}" alt="Hotel image">
     </div>
 
     <!-- Actions -->

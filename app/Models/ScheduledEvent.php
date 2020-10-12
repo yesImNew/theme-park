@@ -12,8 +12,10 @@ class ScheduledEvent extends Model
 
     protected $guarded = ['id'];
 
-    public function getDateAttribute($value)
-    {
-        return new Carbon($value);
-    }
+    /**
+    * Caste the date field to date type
+    */
+    protected $casts = [
+        'date' => 'date',
+    ];
 }

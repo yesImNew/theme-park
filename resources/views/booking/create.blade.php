@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Booking')
+@section('title', 'Bookings')
 
 @section('content')
 <section class="text-gray-700 body-font">
@@ -16,21 +16,21 @@
       <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Your Information</h1>
       <hr>
 
-      <input type="text" hidden name="user_id" value="{{ Auth::id() }}">
+      <input type="text" hidden name="customer_id" value="{{ $customer->id }}">
       <div class="flex flex-wrap mt-3 mb-6 w-full">
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Name </label>
-          <input class="form-input" type="text" value="{{ Auth::user()->name }}" disabled>
+          <input class="form-input" type="text" value="{{ $customer->name }}" disabled>
         </div>
 
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> NID </label>
-          <input class="form-input" type="text" value="{{ Auth::user()->email }}" disabled>
+          <input class="form-input" type="text" value="{{ $customer->nid }}" disabled>
         </div>
 
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Phone Number </label>
-          <input class="form-input" type="text" value="{{ Auth::user()->name }}" disabled>
+          <input class="form-input" type="text" value="{{ $customer->phone_no }}" disabled>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
       <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Event Information</h1>
       <hr>
 
-      <input type="text" name="event_id" hidden value="{{ $event }}">
+      <input type="text" name="scheduled_event_id" hidden value="{{ $event->id }}">
       <div class="flex flex-wrap mt-3 mb-6 w-full">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Event Title </label>
@@ -55,7 +55,8 @@
       <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Room Booking Information</h1>
       <hr>
 
-      <input type="text" name="room_id" hidden value="{{ $room }}">
+      <input type="text" name="room_id" hidden value="{{ $room->id }}">
+      <input type="text" name="price" hidden value="{{ $room->price }}">
       <div class="flex flex-wrap mt-3 mb-6 w-full">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Hotel </label>
@@ -83,7 +84,7 @@
       <!-- Submit -->
       <div class="flex items-center mx-3 pt-4">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">Confirm</button>
-        <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block" href="{{ route('home') }}">Cancel</a>
+        <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block" onclick="{{ session()->forget(['room', 'event']) }}" href="{{ route('home') }}">Cancel</a>
       </div>
     </form>
   </div>

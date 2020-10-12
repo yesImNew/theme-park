@@ -35,6 +35,32 @@
           @error('email') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>
 
+        <!-- Phone number -->
+        <div class="w-full px-3 mb-6">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="phone_no"> Phone number </label>
+
+          <div class="relative group">
+            <div class="border absolute inset-y-0 left-0 px-2 bg-gray-300 border-gray-400 group-hover:border-gray-600 rounded-tl rounded-bl pointer-events-none flex items-center
+             {{ $errors->has('phone_no') ? 'border-red-500' : '' }}">
+              <span class="text-gray-500"> +960 </span>
+            </div>
+            <input class="form-input shadow border-gray-400 pl-16 {{ $errors->has('phone_no') ? 'border-red-500' : '' }}"
+              type="text" name="phone_no" value="{{ old('phone_no') }}">
+          </div>
+          @error('phone_no') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
+        </div>
+
+        <!-- National ID -->
+        <div class="w-full px-3 mb-6">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="nid"> Customer NID </label>
+          <input class="form-input shadow border-gray-400 {{ $errors->has('nid') ? 'border-red-500' : '' }}"
+            type="text" name="nid" value="{{ old('nid') }}">
+
+          @error('nid') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
+        </div>
+
         <!-- Password -->
         <div class="w-full px-3 mb-6">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

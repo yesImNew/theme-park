@@ -16,7 +16,9 @@ class BookingRecordController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = BookingRecord::with(['event', 'customer', 'room'])->paginate(10);
+
+        return view('booking.index', compact('bookings'));
     }
 
     /**
@@ -44,6 +46,7 @@ class BookingRecordController extends Controller
         return view('booking.create')->with([
             'room' => session('room'),
             'event' => session('event'),
+            'customer' => Auth::user()->customer,
         ]);
 
     }
@@ -56,9 +59,21 @@ class BookingRecordController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
 
+        $data = $request->validate([
+            'customer_id' => 'required',
+            'scheduled_event_id' => 'required',
+            'room_id' => 'required',
+            'price' => 'required',
         ]);
+
+        $data['reference'] = $this->getNewReference();
+
+        BookingRecord::create($data);
+        session()->forget(['room', 'event']);
+
+        return redirect()->route('bookings.index')
+            ->with('success', ['Created', 'New booking created']);
     }
 
     /**
@@ -106,7 +121,7 @@ class BookingRecordController extends Controller
         //
     }
 
-    private function makeReference() {
+    private function getNewReference() {
         $user = str_pad(Auth::id(), 2, rand(0, 9));
         $string = strtoupper(bin2hex(random_bytes(3)));
         return $user . $string;

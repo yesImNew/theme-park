@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\BookingRecord;
 use App\Models\Customer;
 use App\Models\Hotel;
+use App\Models\ScheduledEvent;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -29,13 +30,11 @@ class BookingRecordFactory extends Factory
 
         return [
             'reference' => Str::random(7),
-            'start' => $this->faker->dateTimeBetween('now', '+5 days'),
-            'end' => $this->faker->dateTimeBetween('+6 days', '+10 days'),
-            'customer_id' => Customer::all()->random(),
-            'hotel_id' => $hotel->id,
+            'scheduled_event_id' => ScheduledEvent::all()->random(),
             'room_id' => $room->id,
-            'room_type' => $room->type,
             'price' => $room->price,
+            'customer_id' => Customer::all()->random(),
+            // 'room_type' => $room->type,
         ];
     }
 }

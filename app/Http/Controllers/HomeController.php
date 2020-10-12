@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\ScheduledEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

@@ -11,9 +11,9 @@ class BookingRecord extends Model
 
     protected $guarded = ['id'];
 
-    public function hotel()
+    public function event()
     {
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(ScheduledEvent::class, 'scheduled_event_id');
     }
 
     public function customer()
@@ -24,5 +24,13 @@ class BookingRecord extends Model
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    /**
+     * Returns the date of the event
+     */
+    public function getDateAttribute()
+    {
+        return $this->event->date->toFormattedDateString();
     }
 }

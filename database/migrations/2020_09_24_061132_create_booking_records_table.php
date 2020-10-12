@@ -19,7 +19,7 @@ class CreateBookingRecordsTable extends Migration
             $table->foreignId('scheduled_event_id')->constrained()->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->decimal('price');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
