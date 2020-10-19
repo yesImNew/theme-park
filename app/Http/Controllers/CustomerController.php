@@ -58,7 +58,11 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('customer.show', compact('customer'));
+        if ($customer->signedUp) {
+            return redirect()->route('users.show', $customer->user);
+        }
+
+        return view('user.show', compact('customer'));
     }
 
     /**

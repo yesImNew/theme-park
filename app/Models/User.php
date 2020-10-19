@@ -39,11 +39,17 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'date',
     ];
 
     public function customer()
     {
         return $this->hasOne(Customer::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasManyThrough(BookingRecord::class, Customer::class);
     }
 
     public function getIsCustomerAttribute()
