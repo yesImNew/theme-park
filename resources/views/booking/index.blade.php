@@ -33,7 +33,9 @@
               <a href="{{ route('bookings.edit', $booking) }}" class="hover:underline"> {{ $booking->reference }}</a>
             </td>
 
-            <td class="px-4 py-2">{{ $booking->customer->name }}</td>
+            <td class="px-4 py-2">
+              <a href="{{ route('customers.show', $booking->customer) }}" class="hover:underline">{{ $booking->customer->name }} <br> {{ $booking->customer->phone_no }}</a>
+            </td>
             <td class="px-4 py-2">{{ $booking->event->title }} <br> {{ $booking->date }}</td>
             <td class="px-4 py-2">{{ $booking->room->number }} <br> {{ $booking->room->type->name }}</td>
             <td class="px-4 py-2">{{ $booking->price }}</td>

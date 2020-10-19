@@ -28,6 +28,10 @@ class BookingRecordController extends Controller
      */
     public function create(Request $request)
     {
+        // Admin
+        // TODO: Admin booking view
+
+        // Nornal users
         if ($request->has('room')) {
             session(['room' => Room::findOrFail($request->room)]);
 
@@ -48,7 +52,6 @@ class BookingRecordController extends Controller
             'event' => session('event'),
             'customer' => Auth::user()->customer,
         ]);
-
     }
 
     /**
