@@ -36,6 +36,11 @@ class Customer extends Model
         return $this->hasMany(BookingRecord::class);
     }
 
+    public function ticketRecords()
+    {
+        return $this->hasMany(TicketRecords::class);
+    }
+
     public function getSignedUpAttribute()
     {
         return $this->user()->exists();

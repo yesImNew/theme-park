@@ -18,7 +18,8 @@ class CreateTicketRecordsTable extends Migration
             $table->foreignId('activity_id')->constrained();
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('scheduled_event_id')->constrained();
-            $table->integer('no_of_tickets');
+            $table->integer('tickets');
+            $table->decimal('price');
             $table->timestamps();
         });
     }

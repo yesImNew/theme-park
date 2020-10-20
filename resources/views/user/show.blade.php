@@ -36,10 +36,10 @@
           <h2 class="leading-relaxed text-xl mb-4">Booking Records</h2>
 
           @forelse ($customer->bookings as $booking)
-          <div class="bg-white shadow rounded-md p-4" x-data="{ open : false }">
+          <div class="bg-white shadow rounded-md p-4 mb-4" x-data="{ open : false }">
 
             <!-- Event info -->
-            <div class="mb-4 text-gray-700 text-left">
+            <div class="text-gray-700 text-left">
               <p class="py-1 border-b font-semibold flex justify-between items-center">Event
                 <span class="text-sm font-normal px-3 text-red-500">{{ $booking->event->date->diffForHumans() }}</span>
               </p>
@@ -48,7 +48,7 @@
             </div>
 
             <!-- Hidden -->
-            <div x-show="open" class="text-gray-700" x-cloak
+            <div x-show="open" class="text-gray-700 mt-4" x-cloak
               x-transition:enter="transition-transform transition-opacity ease-out duration-300"
               x-transition:enter-start="opacity-50 transform -translate-y-2"
               x-transition:enter-end="opacity-100 transform translate-y-0"
@@ -71,6 +71,9 @@
               <div class="text-gray-700 text-left">
                 <p class="py-1 border-b font-semibold">Activities</p>
                 <p>Name: Some name</p>
+
+                <a class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                  href="{{ route('ticket-records.create', ['event' => $booking->event]) }}">Buy Tickets</a>
               </div>
 
               <!-- Show less -->
