@@ -18,4 +18,16 @@ class ScheduledEvent extends Model
     protected $casts = [
         'date' => 'date',
     ];
+
+    public function ticketRecords()
+    {
+        return $this->hasMany(TicketRecord::class);
+    }
+
+    public function bookingRecords()
+    {
+        return $this->hasMany(BookingRecord::class);
+    }
+
+    
 }

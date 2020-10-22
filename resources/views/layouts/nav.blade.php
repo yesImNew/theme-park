@@ -73,6 +73,7 @@
         <a class="ml-5 focus:outline-none {{ Request::is('activities*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('activities.index') }}">Activities</a>
         <a class="ml-5 focus:outline-none {{ Request::is('scheduled-events*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('scheduled-events.index') }}">Events</a>
         <a class="ml-5 focus:outline-none {{ Request::is('bookings*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('bookings.index') }}">Bookings</a>
+        <a class="ml-5 focus:outline-none {{ Request::is('ticket-records*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('ticket-records.index') }}">Tickets</a>
       </div>
       @endauth
     </nav>

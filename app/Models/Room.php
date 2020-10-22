@@ -11,6 +11,8 @@ class Room extends Model
 
     protected $guarded = ['id'];
 
+    public $with = ['hotel'];
+
     public function hotel()
     {
         return $this->belongsTo(Hotel::class);

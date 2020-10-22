@@ -2,7 +2,7 @@
 @section('title', 'Hotels')
 
 @section('content')
-<section class="text-gray-700 body-font">
+<section class="text-gray-700 body-font h-screen">
   <div class="container px-5 py-24 mx-auto flex flex-col">
     <div class="lg:w-3/4 w-full mx-auto">
       <div class="flex flex-col sm:flex-row">
@@ -31,75 +31,90 @@
           </div>
         </div>
 
-        <!-- Booking Info -->
+        <!-- Bookings and tickets -->
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-300 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-          <h2 class="leading-relaxed text-xl mb-4">Booking Records</h2>
 
-          @forelse ($customer->bookings as $booking)
-          <div class="bg-white shadow rounded-md p-4 mb-4" x-data="{ open : false }">
+          <div> <!-- Booking Records -->
+            <h2 class="leading-relaxed text-xl mb-4">Booking Records</h2>
 
-            <!-- Event info -->
-            <div class="text-gray-700 text-left">
-              <p class="py-1 border-b font-semibold flex justify-between items-center">Event
-                <span class="text-sm font-normal px-3 text-red-500">{{ $booking->event->date->diffForHumans() }}</span>
-              </p>
-              <p>Title: {{ $booking->event->title }}</p>
-              <p class="flex justify-between items-center text-gray-700">Date: {{ $booking->event->date->toFormattedDateString() }}</p>
-            </div>
+            @forelse ($bookedEvents as $event)
+            <div class="bg-white shadow rounded-md p-4 mb-4" x-data="{ open : false }">
 
-            <!-- Hidden -->
-            <div x-show="open" class="text-gray-700 mt-4" x-cloak
-              x-transition:enter="transition-transform transition-opacity ease-out duration-300"
-              x-transition:enter-start="opacity-50 transform -translate-y-2"
-              x-transition:enter-end="opacity-100 transform translate-y-0"
-              x-transition:leave="transition ease-in duration-100"
-              x-transition:leave-start="opacity-100 transform translate-y-0"
-              x-transition:leave-end="opacity-0 transform -translate-y-2"
-            >
-              <!-- Room and Hotel -->
-              <div class="text-gray-700 text-left mb-4">
-                <p class="py-1 border-b font-semibold flex justify-between items-center">Room
-                <span class="text-sm font-mono px-3">Ref# {{ $booking->reference }}</span>
-                </p>
-                <p>Number: {{ $booking->room->number }}</p>
-                <p>Type: {{ $booking->room->type->name }}</p>
-                <p>Hotel: {{ $booking->room->hotel->name }}</p>
-                <p>$ {{ $booking->room->price }}</p>
-              </div>
-
-              <!-- Activities -->
+              <!-- Event info -->
               <div class="text-gray-700 text-left">
-                <p class="py-1 border-b font-semibold">Activities</p>
-                <p>Name: Some name</p>
-
-                <a class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
-                  href="{{ route('ticket-records.create', ['event' => $booking->event]) }}">Buy Tickets</a>
+                <p class="py-1 border-b font-semibold flex justify-between items-center">Event
+                  <span class="text-sm font-normal px-3 text-red-500">{{ $event->date->diffForHumans() }}</span>
+                </p>
+                <p>Title: {{ $event->title }}</p>
+                <p class="flex justify-between items-center text-gray-700">Date: {{ $event->date->toFormattedDateString() }}</p>
               </div>
 
-              <!-- Show less -->
-              <div class="w-full flex items-center justify-end" x-show="open">
-                <a class="text-blue-500 text-sm cursor-pointer inline-flex items-center" x-on:click="open = false">Show Less
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down w-8 h-8 ml-2" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Hidden -->
+              <div x-show="open" class="text-gray-700 mt-4" x-cloak
+                x-transition:enter="transition-transform transition-opacity ease-out duration-300"
+                x-transition:enter-start="opacity-50 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-100"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2"
+              >
+                <!-- Room and Hotel -->
+                @foreach ($event->bookingRecords as $booking)
+                <div class="text-gray-700 text-left mb-4">
+                  <p class="py-1 border-b font-semibold flex justify-between items-center">Room
+                    <span class="text-sm font-mono px-3">Ref# {{ $booking->reference }}</span>
+                  </p>
+                  <p>Number: {{ $booking->room->number }}</p>
+                  <p>Type: {{ $booking->room->type->name }}</p>
+                  <p>Hotel: {{ $booking->room->hotel->name }}</p>
+                  <p>$ {{ $booking->room->price }}</p>
+                </div>
+                @endforeach
+
+                <!-- Activities -->
+                <div class="text-gray-700 text-left">
+                  <p class="py-1 border-b font-semibold">Tickets</p>
+                  @foreach ($event->ticketRecords as $ticketRecord)
+                  <p>Activity: {{ $ticketRecord->activity->name }}</p>
+                  <p>price: {{ $ticketRecord->price }}</p>
+                  <p class="mb-4">Tickets: {{ $ticketRecord->tickets }}</p>
+                  @endforeach
+                </div>
+
+                <div>
+                  <a class="bg-red-500 hover:bg-red-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                    href="{{ route('ticket-records.create', ['event' => $event]) }}">Buy Tickets</a>
+
+                  <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                    href="{{ route('hotel.booking', ['event' => $event]) }}"">Book Room</a>
+                </div>
+
+                <!-- Show less -->
+                <div class="w-full flex items-center justify-end" x-show="open">
+                  <a class="text-blue-500 text-sm cursor-pointer inline-flex items-center" x-on:click="open = false">Show Less
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down w-8 h-8 ml-2" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <polyline points="6 15 12 9 18 15" />
+                  </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Show more -->
+              <div class="w-full flex items-center justify-end" x-show="!open">
+                <a class="text-blue-500 text-sm cursor-pointer inline-flex items-center" x-on:click="open = true">Show More
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down w-8 h-8 ml-2 pt-1" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <polyline points="6 15 12 9 18 15" />
+                  <polyline points="6 9 12 15 18 9" />
                 </svg>
                 </a>
               </div>
             </div>
-
-            <!-- Show more -->
-            <div class="w-full flex items-center justify-end" x-show="!open">
-              <a class="text-blue-500 text-sm cursor-pointer inline-flex items-center" x-on:click="open = true">Show More
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down w-8 h-8 ml-2 pt-1" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-              </a>
-            </div>
+            @empty
+            <span class="text-sm italic font-light">No booking records</span>
+            @endforelse
           </div>
-          @empty
-          <span class="text-sm italic font-light">No booking records</span>
-          @endforelse
+
         </div>
       </div>
     </div>

@@ -11,6 +11,8 @@ class BookingRecord extends Model
 
     protected $guarded = ['id'];
 
+    public $with = ['room'];
+
     public function event()
     {
         return $this->belongsTo(ScheduledEvent::class, 'scheduled_event_id');

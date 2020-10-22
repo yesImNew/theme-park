@@ -17,7 +17,9 @@ class TicketRecordController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = TicketRecord::with('customer', 'activity', 'event')->paginate(10);
+
+        return view('ticketing.index', compact('tickets'));
     }
 
     /**
@@ -50,8 +52,10 @@ class TicketRecordController extends Controller
             'activities.*.tickets' => 'nullable|integer',
         ]);
 
-        $activities = $data['activities'];
+        //TODO: Check if user has booking for the event
 
+        // Create
+        $activities = $data['activities'];
         foreach ($activities as $key => $activity) {
             if (isset($activity['tickets'])) {
 
@@ -111,8 +115,11 @@ class TicketRecordController extends Controller
      * @param  \App\Models\TicketRecords  $ticketRecords
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TicketRecord $ticketRecords)
+    public function destroy(TicketRecord $ticketRecord)
     {
-        //
+        $ticketRecord->delete();
+
+        return redirect()->back()
+            ->with('danger', ['Deleted' , 'Ticket record removed']);
     }
 }

@@ -38,7 +38,7 @@ class Customer extends Model
 
     public function ticketRecords()
     {
-        return $this->hasMany(TicketRecords::class);
+        return $this->hasMany(TicketRecord::class);
     }
 
     public function getSignedUpAttribute()

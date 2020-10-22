@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ScheduledEvent;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -47,9 +49,16 @@ class UserController extends Controller
     public function show(User $user)
     {
         $customer = $user->customer;
-        $customer->load('bookings.event', 'bookings.room');
+        $customer_id = $customer->id;
 
-        return view('user.show', compact('user', 'customer'));
+        // Get booking customer's bookings and tickets grouped by event
+        $callback = fn($query) => $query->where('customer_id', $customer_id);
+        $bookedEvents = ScheduledEvent::whereHas('bookingRecords', $callback)
+            ->with(['bookingRecords' => $callback, 'ticketRecords' => $callback])
+            ->orderby('date')
+            ->get();
+
+        return view('user.show', compact('user', 'customer', 'bookedEvents'));
     }
 
     /**
