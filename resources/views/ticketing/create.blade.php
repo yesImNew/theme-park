@@ -33,8 +33,8 @@
           </div>
 
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Tickets </label>
-            <input class="form-input" type="number" name="activities[{{ $activity->id }}][tickets]">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Tickets {{ $activity->id }} </label>
+            <input class="form-input {{ $errors->has('activities.' . $activity->id . '.tickets') ? 'border-red-500' : '' }}" name="activities[{{ $activity->id }}][tickets]">
           </div>
         </div>
       @empty

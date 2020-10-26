@@ -79,13 +79,21 @@
                 <div class="text-gray-700 text-left">
                   <p class="py-1 border-b border-blue-500 font-semibold">Tickets</p>
                   @foreach ($event->ticketRecords as $ticketRecord)
-                  <ul class="p-1">
-                    @if (! $loop->first)
-                    <li class="mx-auto w-1/2 border-t h-1"></li>
-                    @endif
-                    <li>Activity: {{ $ticketRecord->activity->name }}</li>
-                    <li>price: {{ $ticketRecord->price }}</li>
-                    <li>Tickets: {{ $ticketRecord->tickets }}</li>
+                  <ul class="p-2 flex bg-gray-100 my-2 border">
+                    <div class="w-3/4">
+                      <li>Activity: {{ $ticketRecord->activity->name }}</li>
+                      <li>Price: {{ $ticketRecord->price }}</li>
+                      <li>Tickets: {{ $ticketRecord->tickets }}</li>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-around w-1/4">
+                      <form action="{{ route('ticket-records.destroy', $ticketRecord) }}" method="POST">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="border border-red-600 text-red-600 hover:bg-red-500 hover:text-white text-sm font-semibold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block">Cancel</button>
+                      </form>
+                      <a class="border border-blue-600 text-blue-600 hover:bg-blue-500 hover:text-white text-sm font-semibold px-6 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                        href="{{ route('ticket-records.edit', $ticketRecord) }}">Edit</a>
+                    </div>
                   </ul>
                   @endforeach
                 </div>

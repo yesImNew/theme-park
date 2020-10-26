@@ -55,7 +55,7 @@ class TicketRecordController extends Controller
     {
         $data = $request->validate([
             'scheduled_event_id' => 'required|exists:scheduled_events,id',
-            'activities.*.tickets' => 'nullable|integer',
+            'activities.*.tickets' => 'nullable|integer|min:1',
         ]);
 
         $activities = $data['activities'];
@@ -130,13 +130,14 @@ class TicketRecordController extends Controller
     public function update(Request $request, TicketRecord $ticketRecord)
     {
         $data = $request->validate([
-            'tickets' => 'required|integer'
+            'tickets' => 'required|integer|min:1'
         ]);
 
         $ticketRecord->update($data);
 
         return redirect()->route('customers.show', $ticketRecord->customer_id)
             ->with('success', ['Updated', 'Ticket details updated successfully']);
+
     }
 
     /**
