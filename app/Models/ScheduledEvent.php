@@ -29,5 +29,9 @@ class ScheduledEvent extends Model
         return $this->hasMany(BookingRecord::class);
     }
 
-    
+    // UTC+05:00
+    public function getLocalDateAttribute() {
+        return $this->date->subHours(5);
+    }
+
 }
