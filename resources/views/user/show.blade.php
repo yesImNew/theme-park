@@ -42,11 +42,13 @@
 
               <!-- Event info -->
               <div class="text-gray-700 text-left">
-                <p class="py-1 border-b font-semibold flex justify-between items-center">Event
+                <p class="py-1 border-b border-blue-500 font-semibold flex justify-between items-center">Event
                   <span class="text-sm font-normal px-3 text-red-500">{{ $event->date->diffForHumans() }}</span>
                 </p>
-                <p>Title: {{ $event->title }}</p>
-                <p class="flex justify-between items-center text-gray-700">Date: {{ $event->date->toFormattedDateString() }}</p>
+                <ul class="p-1">
+                  <li>Title: {{ $event->title }}</li>
+                  <li>Date: {{ $event->date->toFormattedDateString() }}</li>
+                </ul>
               </div>
 
               <!-- Hidden -->
@@ -61,31 +63,38 @@
                 <!-- Room and Hotel -->
                 @foreach ($event->bookingRecords as $booking)
                 <div class="text-gray-700 text-left mb-4">
-                  <p class="py-1 border-b font-semibold flex justify-between items-center">Room
+                  <p class="py-1 border-b border-blue-500 font-semibold flex justify-between items-center">Room
                     <span class="text-sm font-mono px-3">Ref# {{ $booking->reference }}</span>
                   </p>
-                  <p>Number: {{ $booking->room->number }}</p>
-                  <p>Type: {{ $booking->room->type->name }}</p>
-                  <p>Hotel: {{ $booking->room->hotel->name }}</p>
-                  <p>$ {{ $booking->room->price }}</p>
+                  <ul class="p-1">
+                    <li>Number: {{ $booking->room->number }}</li>
+                    <li>Type: {{ $booking->room->type->name }}</li>
+                    <li>Hotel: {{ $booking->room->hotel->name }}</li>
+                    <li>MVR {{ $booking->room->price }}</li>
+                  </ul>
                 </div>
                 @endforeach
 
                 <!-- Activities -->
                 <div class="text-gray-700 text-left">
-                  <p class="py-1 border-b font-semibold">Tickets</p>
+                  <p class="py-1 border-b border-blue-500 font-semibold">Tickets</p>
                   @foreach ($event->ticketRecords as $ticketRecord)
-                  <p>Activity: {{ $ticketRecord->activity->name }}</p>
-                  <p>price: {{ $ticketRecord->price }}</p>
-                  <p class="mb-4">Tickets: {{ $ticketRecord->tickets }}</p>
+                  <ul class="p-1">
+                    @if (! $loop->first)
+                    <li class="mx-auto w-1/2 border-t h-1"></li>
+                    @endif
+                    <li>Activity: {{ $ticketRecord->activity->name }}</li>
+                    <li>price: {{ $ticketRecord->price }}</li>
+                    <li>Tickets: {{ $ticketRecord->tickets }}</li>
+                  </ul>
                   @endforeach
                 </div>
 
-                <div>
-                  <a class="bg-red-500 hover:bg-red-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                <div class="mt-8">
+                  <a class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold shadow py-1 px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
                     href="{{ route('ticket-records.create', ['event' => $event]) }}">Buy Tickets</a>
 
-                  <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                  <a class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold shadow py-1 px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block ml-2"
                     href="{{ route('hotel.booking', ['event' => $event]) }}"">Book Room</a>
                 </div>
 

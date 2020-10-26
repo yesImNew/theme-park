@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\ScheduledEvent;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -59,10 +60,18 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         if ($customer->signedUp) {
+            session()->reflash();
             return redirect()->route('users.show', $customer->user);
         }
 
-        return view('user.show', compact('customer'));
+        // Get booking customer's bookings and tickets grouped by event
+        $callback = fn($query) => $query->where('customer_id', $customer->id);
+        $bookedEvents = ScheduledEvent::whereHas('bookingRecords', $callback)
+            ->with(['bookingRecords' => $callback, 'ticketRecords' => $callback])
+            ->orderby('date')
+            ->get();
+
+        return view('user.show', compact('customer', 'bookedEvents'));
     }
 
     /**

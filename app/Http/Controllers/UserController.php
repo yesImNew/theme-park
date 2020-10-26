@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ScheduledEvent;
-use Illuminate\Database\Eloquent\Builder;
 use App\Models\User;
 use Illuminate\Http\Request;
 

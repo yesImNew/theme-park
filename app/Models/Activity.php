@@ -15,4 +15,9 @@ class Activity extends Model
     {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
+
+    public function ticketRecords()
+    {
+        return $this->hasMany(TicketRecord::class);
+    }
 }
