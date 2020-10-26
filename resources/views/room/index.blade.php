@@ -25,7 +25,7 @@
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Type</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Price</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 hidden sm:table-cell">Hotel</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Status</th>
+            {{-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Status</th> --}}
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center hidden md:table-cell">Actions</th>
           </tr>
         </thead>
@@ -39,7 +39,7 @@
             <td class="px-4 py-2">{{ $room->type->name }}</td>
             <td class="px-4 py-2">{{ $room->price }}</td>
             <td class="px-4 py-2 hidden sm:table-cell">{{ $room->hotel->name }}</td>
-            <td class="px-4 py-2">{{ $room->status }}</td>
+            {{-- <td class="px-4 py-2">{{ $room->status }}</td> --}}
 
             <td class="px-4 py-2 justify-center hidden md:flex">
               <a href="{{ route('rooms.edit', $room) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>

@@ -40,8 +40,7 @@ class RoomController extends Controller
         }
 
         // Select hotel by default if redirected from hotel show
-        $selected = '';
-        if ($request->has('hotel')) { $selected = $request->hotel; }
+        $selected = $request->has('hotel') ? $request->hotel : '';
 
         $hotels = Hotel::all()->pluck('name', 'id');
         $types = RoomType::all()->pluck('name', 'id');
@@ -86,7 +85,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+        return redirect()->route('rooms.index');
     }
 
     /**

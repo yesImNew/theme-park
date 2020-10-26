@@ -16,14 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create(['name' => 'admin', 'email' => 'admin@mail.com']);
 
-        $this->call([
-            // HotelSeeder::class,
-            RoomTypeSeeder::class,
-            RoomSeeder::class,
-            CustomerSeeder::class,
-            // BookingRecordSeeder::class,
-            ActivitySeeder::class,
-            ScheduledEventSeeder::class,
-        ]);
+        // $this->call([
+        //     RoomTypeSeeder::class,
+        //     RoomSeeder::class,
+        //     CustomerSeeder::class,
+        //     ActivitySeeder::class,
+        //     ScheduledEventSeeder::class,
+
+        //     // HotelSeeder::class,
+        //     // BookingRecordSeeder::class,
+        // ]);
     }
 }
