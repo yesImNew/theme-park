@@ -78,11 +78,13 @@
     <div class="flex flex-wrap -m-4">
       @forelse ($hotel->rooms as $room)
       <div class="p-4 w-full md:w-1/2 lg:w-1/3">
-        <div class="h-full bg-gray-200 group shadow-md border border-blue-500 px-8 py-10 md:py-16 rounded-lg overflow-hidden text-center">
+        <div class="h-full bg-gray-200 group shadow-md border px-8 py-10 md:py-16 rounded-lg overflow-hidden text-center
+          {{ $room->bookings->isEmpty() ? 'border-blue-500' : 'border-gray-500' }}">
 
           <h2 class="tracking-widest uppercase text-xs title-font font-medium mb-2
-            {{ $room->status == 'available' ? 'text-green-500' : 'text-gray-500' }}">
-          {{ $room->status }}
+            {{ $room->bookings->isEmpty() ? 'text-green-500' : 'text-gray-500' }}"
+          >
+            {{ $room->bookings->isEmpty() ? 'available' : 'booked' }}
           </h2>
 
           <div class="inline-flex flex-col items-start mb-5">
@@ -100,12 +102,14 @@
               <button class="text-red-500 hover:text-red-600">Delete</button>
             </form>
 
+            @if ($room->bookings->isEmpty())
             <a class="text-blue-500 hover:text-blue-600 inline-flex items-center px-2" href="{{ route('bookings.create', ['room' => $room]) }}">Book now
               <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
               </svg>
             </a>
+            @endif
           </div>
         </div>
       </div>

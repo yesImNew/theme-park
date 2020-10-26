@@ -56,7 +56,11 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        $hotel->load('rooms');
+        $event_id = session()->has('event') ? session('event')->id : 0;
+
+        $hotel->load(['rooms.bookings' => function ($query) use ($event_id) {
+            $query->where('scheduled_event_id', $event_id);
+        }]);
 
         return view('hotel.show', compact('hotel'));
     }
