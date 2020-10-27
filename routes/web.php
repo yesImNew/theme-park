@@ -25,8 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home/hotels', [HomeController::class, 'hotels'])->name('hotel.booking')
-    ->middleware('auth');
+Route::get('/home/hotels', [HomeController::class, 'hotels'])->name('hotel.booking');
 
 Route::middleware('auth')->group(function () {
     Route::resources([

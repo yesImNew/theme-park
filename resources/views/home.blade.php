@@ -4,7 +4,7 @@
 @section('content')
 <section class="text-gray-700 pb-24">
 
-  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+  <div class="container mx-auto flex px-5 sm:py-24 py-12 md:flex-row flex-col items-center">
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
       <img class="object-cover object-center rounded shadow-md bg-white p-4" alt="hero" src="{{ asset('img/undraw_park.svg') }}">
     </div>
@@ -15,14 +15,14 @@
       <p class="mb-8 leading-relaxed">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni harum iste maxime vitae, commodi expedita eaque corrupti quae numquam quidem laudantium dignissimos fuga distinctio hic eum libero temporibus reprehenderit ea!</p>
       <div class="flex justify-center">
         <a class="inline-flex text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg" href="#events">Events</a>
-        <button class="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">Button</button>
+        <a class="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg ml-4" href="{{ route('hotel.booking') }}">Hotels</a>
       </div>
     </div>
   </div>
 
   <div class="container px-5 py-12 mx-auto flex flex-wrap" id="events">
     @forelse ($events as $event)
-      <div class="flex relative pb-20 event sm:items-center md:w-2/3 mx-auto">
+      <div class="flex relative pb-20 event sm:items-center md:w-4/5 w-full mx-auto">
         <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
           <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
         </div>

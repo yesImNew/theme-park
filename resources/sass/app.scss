@@ -38,6 +38,41 @@
     }
 }
 
+.nav-link {
+    @apply block;
+    @apply px-4;
+    @apply py-2;
+    @apply text-sm;
+    @apply leading-5;
+    @apply text-gray-700;
+
+    &:hover {
+        @apply bg-gray-100;
+        @apply text-gray-900;
+    }
+
+    &:focus {
+        @apply outline-none;
+        @apply bg-gray-100;
+        @apply text-gray-900;
+    }
+}
+
+.side-nav-link {
+    @apply my-1;
+    @apply px-5;
+    @apply py-1;
+    @apply text-sm;
+    @apply inline-block;
+    @apply w-full;
+    @apply rounded;
+
+    &:hover {
+        @apply bg-gray-100;
+        @apply text-gray-800;
+    }
+}
+
 .form-input {
     @apply appearance-none;
     @apply block;
