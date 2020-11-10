@@ -11,7 +11,7 @@
   </div>
 
   <div class="origin-top-right absolute right-0 mt-2 z-10 w-56 rounded-md shadow-lg"
-    x-show="open" x-on:click.away="open = false"
+    x-show="open" x-on:click.away="open = false" x-cloak
     x-transition:enter="transition ease-out duration-100"
     x-transition:enter-start="transform opacity-0 scale-95""
     x-transition:enter-end="transform opacity-100 scale-100"

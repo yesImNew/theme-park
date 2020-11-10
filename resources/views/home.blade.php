@@ -3,7 +3,6 @@
 
 @section('content')
 <section class="text-gray-700 pb-24">
-
   <div class="container mx-auto flex px-5 sm:py-24 py-12 md:flex-row flex-col items-center">
     <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
       <img class="object-cover object-center rounded shadow-md bg-white p-4" alt="hero" src="{{ asset('img/undraw_park.svg') }}">

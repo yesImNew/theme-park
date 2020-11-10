@@ -9,30 +9,36 @@
     </div>
 
     <form class="lg:w-2/3 w-full mx-auto mb-4 bg-white shadow-md rounded py-8 px-6"
-      action="{{ route('bookings.store') }}" method="POST">
+      action="{{ route('booking-records.store') }}" method="POST">
       @csrf
 
-      <!-- User -->
-      <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Your Information</h1>
+      <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">User Information</h1>
       <hr>
 
-      <input type="text" hidden name="customer_id" value="{{ $customer->id }}">
-      <div class="flex flex-wrap mt-3 mb-6 w-full">
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Name </label>
-          <input class="form-input" type="text" value="{{ $customer->name }}" disabled>
-        </div>
 
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> NID </label>
-          <input class="form-input" type="text" value="{{ $customer->nid }}" disabled>
-        </div>
 
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Phone Number </label>
-          <input class="form-input" type="text" value="{{ $customer->phone_no }}" disabled>
+      @includeWhen(Auth::user()->isAdmin, 'partials.admin-booking')
+
+      @if (Auth::user()->isCustomer)
+        <!-- Normal Users / Customers -->
+        <input type="text" hidden name="customer_id" value="{{ $customer->id }}">
+        <div class="flex flex-wrap mt-3 mb-6 w-full">
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Name </label>
+            <input class="form-input" type="text" value="{{ $customer->name }}" disabled>
+          </div>
+
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> NID </label>
+            <input class="form-input" type="text" value="{{ $customer->nid }}" disabled>
+          </div>
+
+          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Phone Number </label>
+            <input class="form-input" type="text" value="{{ $customer->phone_no }}" disabled>
+          </div>
         </div>
-      </div>
+      @endif
 
       <!-- Event -->
       <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Event Information</h1>
@@ -84,7 +90,8 @@
       <!-- Submit -->
       <div class="flex items-center mx-3 pt-4">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="submit">Confirm</button>
-        <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block" onclick="{{ session()->forget(['room', 'event']) }}" href="{{ route('home') }}">Cancel</a>
+        <a class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
+          {{-- onclick="{{ session()->forget(['room', 'event']) }}"  --}} href="{{ route('home') }}">Cancel</a>
       </div>
     </form>
   </div>

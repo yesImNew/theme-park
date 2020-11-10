@@ -14,7 +14,7 @@
   </div>
 
   <div class="origin-top-left absolute left-0 mt-2 ml-5 z-10 w-56 rounded-md shadow-lg"
-    x-show="open" x-on:click.away="open = false"
+    x-show="open" x-on:click.away="open = false" x-cloak
     x-transition:enter="transition ease-out duration-100"
     x-transition:enter-start="transform opacity-0 scale-95""
     x-transition:enter-end="transform opacity-100 scale-100"
@@ -37,7 +37,7 @@
         <a href="{{ route('activities.index') }}" class="nav-link" role="menuitem">Activities</a>
       </div>
       <div class="py-1 border-t border-gray-200">
-        <a href="{{ route('bookings.index') }}" class="nav-link" role="menuitem">Booking Records</a>
+        <a href="{{ route('booking-records.index') }}" class="nav-link" role="menuitem">Booking Records</a>
         <a href="{{ route('ticket-records.index') }}" class="nav-link" role="menuitem">Ticket Records</a>
       </div>
     </div>

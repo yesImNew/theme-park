@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create(['name' => 'admin', 'email' => 'admin@mail.com']);
+        User::factory()->create(['name' => 'admin', 'email' => 'admin@mail.com', 'role' => 'admin']);
 
         // $this->call([
         //     RoomTypeSeeder::class,

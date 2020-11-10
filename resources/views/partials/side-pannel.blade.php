@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        {{-- Admin Only --}}
+        @can('manage')
         <nav class="px-10 py-4 border">
           <p>Manage</p>
           <ul class="my-2">
@@ -58,10 +58,11 @@
             <li class="border-b"> <a href="{{ route('room-types.index') }}" class="side-nav-link">Room Types</a> </li>
             <li> <a href="{{ route('scheduled-events.index') }}" class="side-nav-link">Scheduled Events</a> </li>
             <li class="border-b"> <a href="{{ route('activities.index') }}" class="side-nav-link">Activities</a> </li>
-            <li> <a href="{{ route('bookings.index') }}" class="side-nav-link">Booking Records</a> </li>
+            <li> <a href="{{ route('booking-records.index') }}" class="side-nav-link">Booking Records</a> </li>
             <li> <a href="{{ route('ticket-records.index') }}" class="side-nav-link">Ticket Records</a> </li>
           </ul>
         </nav>
+        @endcan
 
         <div class="px-10 pb-20">
           <a class="inline-flex items-center rounded border border-gray-500 px-8 py-1 mt-4 bg-gray-200 cursor-pointer

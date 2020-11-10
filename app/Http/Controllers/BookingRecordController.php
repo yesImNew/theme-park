@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingRecord;
+use App\Models\Customer;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,25 +29,31 @@ class BookingRecordController extends Controller
      */
     public function create(Request $request)
     {
-        // Admin
-        // TODO: Admin booking view
-
-        // Nornal users
         if ($request->has('room')) {
             session(['room' => Room::findOrFail($request->room)]);
 
-            return redirect()->route('bookings.create');
+            return redirect()->route('booking-records.create');
         }
 
         if (! session()->has('event')) {
-            return redirect()->back()
-                ->with('warning', ['Warning', 'Did you forget to choose an event?']);
+            return redirect()->route('home')
+                ->with('warning', ['', 'Please choose an event!']);
         }
         elseif (! session()->has('room')) {
             return redirect()->back()
-                ->with('warning', ['Warning', 'Did you forget to choose a room?']);
+            ->with('warning', ['Warning', 'Did you forget to choose a room?']);
         }
 
+        // Admin
+        if (Auth::user()->isAdmin) {
+            $room = session('room');
+            $event = session('event');
+            $customers = Customer::select('id', 'name', 'nid')->get();
+
+            return view('booking.create', compact('event', 'room', 'customers'));
+        }
+
+        // Nornal users
         return view('booking.create')->with([
             'room' => session('room'),
             'event' => session('event'),
@@ -62,21 +69,30 @@ class BookingRecordController extends Controller
      */
     public function store(Request $request)
     {
-
+        // Validation
         $data = $request->validate([
-            'customer_id' => 'required',
+            'customer_id' => 'sometimes|exists:customers,id',
             'scheduled_event_id' => 'required',
             'room_id' => 'required',
             'price' => 'required',
+            'name' => 'required_without:customer_id'
         ]);
 
         $data['reference'] = $this->getNewReference();
 
+        // Create
         BookingRecord::create($data);
-        session()->forget(['room', 'event']);
 
-        return redirect()->route('bookings.index')
-            ->with('success', ['Created', 'New booking created']);
+        // Redirect
+        session()->forget(['room', 'event']);
+        if (Auth::user()->isAdmin) {
+            return redirect()->route('booking-records.index')
+                ->with('success', ['Created', 'New booking created']);
+        }
+        else {
+            return redirect()->route('users.show', Auth::id())
+                ->with('success', ['Created', 'New booking created']);
+        }
     }
 
     /**
@@ -121,7 +137,10 @@ class BookingRecordController extends Controller
      */
     public function destroy(BookingRecord $bookingRecord)
     {
-        //
+        $bookingRecord->delete();
+
+        return redirect()->back()
+            ->with('danger', ['Cancelled' , 'Booking record removed']);
     }
 
     private function getNewReference() {

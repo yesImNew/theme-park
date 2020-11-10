@@ -3,7 +3,7 @@
 
 @section('content')
 <section class="text-gray-700">
-  <header class="container px-5 py-24 mx-auto flex flex-wrap">
+  <header class="container px-5 sm:py-24 py-12 mx-auto flex flex-wrap">
     {{-- TODO: Hotel description, rating --}}
     <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
       <div class="w-full sm:p-4 px-4 mb-6"> <!-- Content -->
@@ -57,7 +57,8 @@
           src="{{ $hotel->image->url ?? asset('img/hotel_placeholder' . rand(1,3). '.svg') }}" alt="Hotel image">
     </div>
 
-    <!-- Actions -->
+    <!-- Hotel Actions -->
+    @can('manage')
     <div class="text-center mt-6 sm:mt-0">
       <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline inline-block"
         href="{{ route('hotels.edit', $hotel) }}">Edit</a>
@@ -70,11 +71,13 @@
 
       <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline mr-2 inline-block"
         href="{{ route('rooms.create', ['hotel' => $hotel]) }}">New Room</a>
-    </div> <!-- Actions end -->
-  </header>
+    </div>
+    @endcan <!-- Hotel Actions end -->
 
+  </header>
   <!-- Rooms -->
   <div class="container px-5 py-12 mx-auto">
+    <h1 class="title-font font-medium text-3xl text-gray-900 py-4"> Rooms </h1>
     <div class="flex flex-wrap -m-4">
       @forelse ($hotel->rooms as $room)
       <div class="p-4 w-full md:w-1/2 lg:w-1/3">
@@ -88,29 +91,31 @@
           </h2>
 
           <div class="inline-flex flex-col items-start mb-5">
-            <h1 class="sm:text-2xl text-xl font-medium text-gray-900">Room {{ $room->number }}
-            <span class="px-5 font-semibold text-gray-700">${{ $room->price }}</span>
+            <h1 class="sm:text-2xl text-xl text-left font-medium text-gray-900">Room {{ $room->number }}
+              <span class="pl-5 font-semibold text-gray-700">${{ $room->price }}</span>
             </h1>
             <p class="leading-relaxed mb-3 text-left">{{ $room->type->name }}</p>
           </div>
 
-          <div>
+          <div> <!-- Room Actions -->
+            @can('manage')
             <a class="text-blue-500 hover:text-blue-600 inline-flex items-center px-2" href="{{ route('rooms.edit', $room) }}">Edit</a>
 
             <form action="{{ route('rooms.destroy', $room) }}" class="px-2 inline" method="POST">
               @csrf @method('DELETE')
               <button class="text-red-500 hover:text-red-600">Delete</button>
             </form>
+            @endcan
 
             @if ($room->bookings->isEmpty())
-            <a class="text-blue-500 hover:text-blue-600 inline-flex items-center px-2" href="{{ route('bookings.create', ['room' => $room]) }}">Book now
+            <a class="text-blue-500 hover:text-blue-600 inline-flex items-center px-2" href="{{ route('booking-records.create', ['room' => $room]) }}">Book now
               <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
               </svg>
             </a>
             @endif
-          </div>
+          </div> <!-- Room Actions end -->
         </div>
       </div>
       @empty

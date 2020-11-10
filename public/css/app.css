@@ -754,6 +754,13 @@ video {
   border-color: rgba(113, 128, 150, var(--border-opacity));
 }
 
+.form-input:disabled {
+  --bg-opacity: 1;
+  background-color: #e2e8f0;
+  background-color: rgba(226, 232, 240, var(--bg-opacity));
+  cursor: not-allowed;
+}
+
 .flatpickr-day.flatpickr-disabled,
 .flatpickr-day.flatpickr-disabled:hover {
   cursor: not-allowed;

@@ -95,6 +95,11 @@
         @apply bg-white;
         @apply border-gray-600;
     }
+
+    &:disabled {
+        @apply bg-gray-300;
+        @apply cursor-not-allowed;
+    }
 }
 
 // flatpickr overrides

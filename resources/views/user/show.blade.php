@@ -3,38 +3,51 @@
 
 @section('content')
 <section class="text-gray-700 body-font h-screen">
-  <div class="container px-5 py-24 mx-auto flex flex-col">
-    <div class="lg:w-3/4 w-full mx-auto">
+  <div class="container px-5 sm:py-24 mx-auto flex flex-col">
+    <div class="lg:w-3/4 w-full mx-auto sm:py-0">
       <div class="flex flex-col sm:flex-row">
         <!-- User info -->
-        <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+        <div class="sm:w-1/3 text-center py-12 sm:pr-8 sm:py-8">
           <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400 border border-blue-300">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
             </svg>
           </div>
+
+          @isset($user)
           <div class="flex flex-col items-center text-center justify-center">
-            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">{{ $customer->name }}</h2>
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">{{ $user->name }}</h2>
             <div class="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
             <p class="text-base text-gray-600 mb-4">
-              @if ($user ?? 0)
               <span class="block">{{ $user->email }}</span>
               <span class="block mb-4"> Joined - {{ $user->created_at->toFormattedDateString() }}</span>
+              @if ($user->isCustomer)
+              <span class="block">{{ $user->customer->phone_no }}</span>
+              <span class="block">{{ $user->customer->nid }}</span>
               @endif
-
-              <span class="block">{{ $customer->phone_no }}</span>
-              <span class="block">{{ $customer->nid }}</span>
             </p>
             <a class="border-2 border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500 font-bold px-4 rounded focus:outline-none focus:shadow-outline inline-block"
               href="#">Edit Profile</a>
           </div>
+          @else
+          <div class="flex flex-col items-center text-center justify-center">
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">{{ $customer->name }}</h2>
+            <div class="w-12 h-1 bg-blue-500 rounded mt-2 mb-4"></div>
+            <p class="text-base text-gray-600 mb-4">
+              <span class="block mb-4 italic font-light"> Not signed up </span>
+              <span class="block">{{ $customer->phone_no }}</span>
+              <span class="block">{{ $customer->nid }}</span>
+            </p>
+          </div>
+          @endisset
         </div>
 
+        @isset($bookedEvents)
         <!-- Bookings and tickets -->
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-blue-300 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
 
-          <div> <!-- Booking Records -->
+          <div class="py-12 sm:py-0"> <!-- Booking Records -->
             <h2 class="leading-relaxed text-xl mb-4">Booking Records</h2>
 
             @forelse ($bookedEvents as $event)
@@ -43,7 +56,13 @@
               <!-- Event info -->
               <div class="text-gray-700 text-left">
                 <p class="py-1 border-b border-blue-500 font-semibold flex justify-between items-center">Event
-                  <span class="text-sm font-normal px-3 text-red-500">{{ $event->date->diffForHumans() }}</span>
+                  <span class="text-sm font-normal px-3 text-red-500">
+                    @if ($event->localDate->diffInMinutes(now(), false) == 0)
+                      Ongoing
+                    @else
+                      {{ $event->localDate->diffForHumans() }}
+                    @endif
+                  </span>
                 </p>
                 <ul class="p-1">
                   <li>Title: {{ $event->title }}</li>
@@ -98,7 +117,7 @@
                   @endforeach
                 </div>
 
-                <div class="mt-8">
+                <div class="mt-8 mb-3">
                   <a class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold shadow py-1 px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
                     href="{{ route('ticket-records.create', ['event' => $event]) }}">Buy Tickets</a>
 
@@ -133,6 +152,8 @@
           </div>
 
         </div>
+        @endisset
+
       </div>
     </div>
   </div>

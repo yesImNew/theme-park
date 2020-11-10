@@ -6,12 +6,11 @@
   <div class="container px-5 py-12 mx-auto">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Book a Hotel</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
     </div>
 
     <div class="lg:w-2/3 w-full mx-auto rounded">
       <!-- Hotel card -->
-      @foreach ($hotels as $hotel)
+      @forelse ($hotels as $hotel)
       <a class="flex mb-5 shadow bg-white rounded-md mx-4 md:mx-auto max-w-md md:max-w-5xl group
         transform hover:-translate-y-2 hover:-translate-x-2 hover:shadow-lg transition duration-300 ease-out"
         href="{{ route('hotels.show', $hotel) }}"
@@ -48,7 +47,13 @@
           </p>
         </div>
       </a>
-      @endforeach
+      @empty
+      <div class="border-b sm:items-center md:w-2/3 mx-auto">
+        <p class="px-4 py-2 text-gray-800 font-thin italic">
+          Sorry! No hotels registered
+        </p>
+      </div>
+      @endforelse
 
     </div>
 

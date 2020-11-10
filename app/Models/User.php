@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use function PHPUnit\Framework\isNull;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -54,7 +56,11 @@ class User extends Authenticatable
 
     public function getIsCustomerAttribute()
     {
-        return $this->customer()->exists();
+        return $this->role == 'customer';
     }
 
+    public function getIsAdminAttribute()
+    {
+        return $this->role == 'admin';
+    }
 }

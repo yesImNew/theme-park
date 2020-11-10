@@ -19,28 +19,30 @@
       <h1 class="font-medium text-gray-800 mb-1 px-3 text-xl leading-relaxed">Availble Activities</h1>
       <hr>
 
-      <div class="flex flex-wrap mt-3 mb-6 w-full">
       @forelse ($activities as $activity)
+      <div class="flex flex-wrap mt-3 mb-6 w-full border-b">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Activity </label>
           <input class="form-input" type="text" value="{{ $activity->name }}" disabled>
         </div>
 
-        <div class="w-full md:w-1/2 flex">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Price </label>
-            <input class="form-input" type="text" value="{{ $activity->price }}" disabled>
-          </div>
+        <div class="w-full md:w-1/2">
+          <div class="flex flex-wrap mb-6 w-full">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Price </label>
+              <input class="form-input" type="text" value="{{ $activity->price }}" disabled>
+            </div>
 
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Tickets {{ $activity->id }} </label>
-            <input class="form-input {{ $errors->has('activities.' . $activity->id . '.tickets') ? 'border-red-500' : '' }}" name="activities[{{ $activity->id }}][tickets]">
+            <div class="w-full md:w-1/2 px-3">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"> Tickets </label>
+              <input class="form-input {{ $errors->has('activities.' . $activity->id . '.tickets') ? 'border-red-500' : '' }}" name="activities[{{ $activity->id }}][tickets]">
+            </div>
           </div>
         </div>
-      @empty
-        <span class="text-sm italic font-light px-3">No activities available for booking</span>
-      @endforelse
       </div>
+      @empty
+      <span class="text-sm italic font-light px-3">No activities available for booking</span>
+      @endforelse
 
       <!-- Submit -->
       <div class="flex items-center mx-3 pt-4">

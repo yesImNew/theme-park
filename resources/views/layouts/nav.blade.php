@@ -15,7 +15,9 @@
       <a class="focus:outline-none ml-5 {{ Request::is('home/*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Hotels</a>
 
       <!-- Admin dropdown -->
-      @include('partials.admin-dropdown')
+      @can('manage')
+        @include('partials.admin-dropdown')
+      @endcan
       @endauth
     </nav>
 

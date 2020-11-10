@@ -11,7 +11,7 @@
 
     <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
       <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700 mr-5"
-        href="{{ route('bookings.create') }}">Create New</a>
+        href="{{ route('booking-records.create') }}">Create New</a>
     </div>
 
     <div class="lg:w-3/4 w-full mx-auto overflow-auto bg-white shadow-md rounded">
@@ -30,7 +30,7 @@
           @forelse ($bookings as $booking)
           <tr class="border-b">
             <td class="px-4 py-2">
-              <a href="{{ route('bookings.edit', $booking) }}" class="hover:underline"> {{ $booking->reference }}</a>
+              <a href="{{ route('booking-records.edit', $booking) }}" class="hover:underline"> {{ $booking->reference }}</a>
             </td>
 
             <td class="px-4 py-2">
@@ -41,9 +41,9 @@
             <td class="px-4 py-2">{{ $booking->price }}</td>
 
             <td class="px-4 py-2 justify-center hidden md:flex">
-              <a href="{{ route('bookings.edit', $booking) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
+              <a href="{{ route('booking-records.edit', $booking) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
 
-              <form action="{{ route('bookings.destroy', $booking) }}" method="POST">
+              <form action="{{ route('booking-records.destroy', $booking) }}" method="POST">
                 @csrf @method('DELETE')
                 <button type="submit" class="px-4 py-1 rounded border border-red-500 hover:bg-red-400 hover:text-gray-100">Delete</button>
               </form>

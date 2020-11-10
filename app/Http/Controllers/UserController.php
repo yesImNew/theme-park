@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ScheduledEvent;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -47,12 +48,18 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+
+        if ($user->isAdmin) {
+            return view('user.show', compact('user'));
+        }
+
         $customer = $user->customer;
         $customer_id = $customer->id;
 
         // Get booking customer's bookings and tickets grouped by event
         $callback = fn($query) => $query->where('customer_id', $customer_id);
-        $bookedEvents = ScheduledEvent::whereHas('bookingRecords', $callback)
+        $bookedEvents = ScheduledEvent::where('date', '>', Carbon::yesterday())
+            ->whereHas('bookingRecords.customer', $callback)
             ->with(['bookingRecords' => $callback, 'ticketRecords' => $callback])
             ->orderby('date')
             ->get();

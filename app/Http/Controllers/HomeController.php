@@ -6,10 +6,10 @@ use App\Models\Hotel;
 use App\Models\ScheduledEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         $events = ScheduledEvent::where('date', '>', Carbon::yesterday())
@@ -22,7 +22,9 @@ class HomeController extends Controller
     public function hotels(Request $request)
     {
         if ($request->has('event')) {
-            session(['event' => ScheduledEvent::findOrFail($request->event)]);
+            // session()->put('event', ScheduledEvent::findOrFail($request->event));
+            $event = ScheduledEvent::findOrFail($request->event);
+            $request->session()->put('event', $event);
         }
 
         $hotels = Hotel::all();

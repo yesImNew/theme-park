@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
         'hotels' => HotelController::class,
         'rooms' => RoomController::class,
         'customers' => CustomerController::class,
-        'bookings' => BookingRecordController::class,
+        'booking-records' => BookingRecordController::class,
         'activities' => ActivityController::class,
         'room-types' => RoomTypeController::class,
         'scheduled-events' => ScheduledEventController::class,
