@@ -57,7 +57,7 @@
               <div class="text-gray-700 text-left">
                 <p class="py-1 border-b border-blue-500 font-semibold flex justify-between items-center">Event
                   <span class="text-sm font-normal px-3 text-red-500">
-                    @if ($event->localDate->diffInMinutes(now(), false) == 0)
+                    @if ($event->localDate->diffInDays(now()) == 0)
                       Ongoing
                     @else
                       {{ $event->localDate->diffForHumans() }}
@@ -97,7 +97,7 @@
                 <!-- Activities -->
                 <div class="text-gray-700 text-left">
                   <p class="py-1 border-b border-blue-500 font-semibold">Tickets</p>
-                  @foreach ($event->ticketRecords as $ticketRecord)
+                  @forelse ($event->ticketRecords as $ticketRecord)
                   <ul class="p-2 flex bg-gray-100 my-2 border">
                     <div class="w-3/4">
                       <li>Activity: {{ $ticketRecord->activity->name }}</li>
@@ -105,25 +105,32 @@
                       <li>Tickets: {{ $ticketRecord->tickets }}</li>
                     </div>
 
-                    <div class="flex flex-col items-center justify-around w-1/4">
-                      <form action="{{ route('ticket-records.destroy', $ticketRecord) }}" method="POST">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="border border-red-600 text-red-600 hover:bg-red-500 hover:text-white text-sm font-semibold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block">Cancel</button>
-                      </form>
-                      <a class="border border-blue-600 text-blue-600 hover:bg-blue-500 hover:text-white text-sm font-semibold px-6 rounded-sm focus:outline-none focus:shadow-outline inline-block"
-                        href="{{ route('ticket-records.edit', $ticketRecord) }}">Edit</a>
-                    </div>
+                     @if ($event->date > \Carbon\Carbon::yesterday())
+                     <div class="flex flex-col items-center justify-around w-1/4">
+                       <form action="{{ route('ticket-records.destroy', $ticketRecord) }}" method="POST">
+                         @csrf @method('DELETE')
+                         <button type="submit" class="border border-red-600 text-red-600 hover:bg-red-500 hover:text-white text-sm font-semibold px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block">Cancel</button>
+                       </form>
+                       <a class="border border-blue-600 text-blue-600 hover:bg-blue-500 hover:text-white text-sm font-semibold px-6 rounded-sm focus:outline-none focus:shadow-outline inline-block"
+                         href="{{ route('ticket-records.edit', $ticketRecord) }}">Edit</a>
+                     </div>
+                     @endif
                   </ul>
-                  @endforeach
+                  @empty
+                  <span class="text-sm italic font-light">No tickets purchased</span>
+                  @endforelse
                 </div>
 
+                @if ($event->date > \Carbon\Carbon::yesterday())
                 <div class="mt-8 mb-3">
                   <a class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold shadow py-1 px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block"
-                    href="{{ route('ticket-records.create', ['event' => $event]) }}">Buy Tickets</a>
+                    href="{{ route('ticket-records.create', ['event' => $event]) }}"
+                    onclick="{{ session(['customer' => $customer]) }}">Buy Tickets</a>
 
                   <a class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold shadow py-1 px-4 rounded-sm focus:outline-none focus:shadow-outline inline-block ml-2"
                     href="{{ route('hotel.booking', ['event' => $event]) }}"">Book Room</a>
                 </div>
+                @endif
 
                 <!-- Show less -->
                 <div class="w-full flex items-center justify-end" x-show="open">

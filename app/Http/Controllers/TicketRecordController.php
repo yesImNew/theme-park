@@ -29,20 +29,19 @@ class TicketRecordController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->has('event')) {
-            $event = ScheduledEvent::findOrFail($request->event);
-            $activities = $this->getActivities($event->id);
-
-            if ($activities->isEmpty()) {
-                return redirect()->back()
-                    ->with('warning', ['', 'You have tickets for all activities']);
-            }
-            else {
-                return view('ticketing.create', compact('event', 'activities'));
-            }
+        if (!$request->has('event') || !session()->has('customer')) {
+            return redirect()->back();
         }
 
-        return redirect()->back();
+        $event = ScheduledEvent::findOrFail($request->event);
+        $activities = $this->getActivities($event->id);
+
+        if ($activities->isEmpty()) {
+            return redirect()->back()
+            ->with('warning', ['', 'You have tickets for all activities']);
+        }
+
+        return view('ticketing.create', compact('event', 'activities'));
     }
 
     /**
@@ -59,12 +58,13 @@ class TicketRecordController extends Controller
         ]);
 
         $activities = $data['activities'];
+        $customer = session()->pull('customer');
 
         // flag to check if all activity tickets are null
         $created = false;
 
         // Check if user has booking for the event
-        if ($this->userHasBooking($data['scheduled_event_id'])) {
+        if ($this->customerHasBooking($data['scheduled_event_id'], $customer)) {
 
             // Create ticket records for each activity
             foreach ($activities as $key => $activity) {
@@ -73,7 +73,7 @@ class TicketRecordController extends Controller
 
                     TicketRecord::create([
                         'activity_id' => $model->id,
-                        'customer_id' => Auth::user()->customer->id,
+                        'customer_id' => $customer->id,
                         'scheduled_event_id' => $data['scheduled_event_id'],
                         'tickets' => $activity['tickets'],
                         'price' => $model->price
@@ -84,11 +84,11 @@ class TicketRecordController extends Controller
             }
 
             if ($created) {
-                return redirect()->route('users.show', Auth::id())
+                return redirect()->route('customers.show', $customer)
                     ->with('success', ['Success', 'Tickets purchased']);
             }
             else {
-                return redirect()->route('users.show', Auth::id());
+                return redirect()->route('customers.show', $customer);
             }
         }
         else {
@@ -158,8 +158,8 @@ class TicketRecordController extends Controller
     * Check if the customer has a booking for a given event
     * @return boolean
     */
-    private function userHasBooking($event_id) {
-        $bookings = Auth::user()->customer->bookings->where('scheduled_event_id', $event_id);
+    private function customerHasBooking($event_id, $customer) {
+        $bookings = $customer->bookings->where('scheduled_event_id', $event_id);
 
         return $bookings->isNotEmpty();
     }
@@ -169,7 +169,7 @@ class TicketRecordController extends Controller
      * @return Collection
      */
     private function getActivities($event_id) {
-        $customer_id = Auth::user()->customer->id;
+        $customer_id = session('customer')->id;
 
         return Activity::whereDoesntHave('ticketRecords', function ($query) use($customer_id,$event_id) {
             $query->where('customer_id', $customer_id)

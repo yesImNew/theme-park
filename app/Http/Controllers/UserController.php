@@ -48,7 +48,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
         if ($user->isAdmin) {
             return view('user.show', compact('user'));
         }
@@ -58,11 +57,14 @@ class UserController extends Controller
 
         // Get booking customer's bookings and tickets grouped by event
         $callback = fn($query) => $query->where('customer_id', $customer_id);
-        $bookedEvents = ScheduledEvent::where('date', '>', Carbon::yesterday())
-            ->whereHas('bookingRecords.customer', $callback)
+        $bookedEvents = ScheduledEvent::whereHas('bookingRecords', $callback)
             ->with(['bookingRecords' => $callback, 'ticketRecords' => $callback])
-            ->orderby('date')
+            ->orderBy('date')
             ->get();
+
+        // Rearrange collection
+        $bookedEvents = $bookedEvents->where('date', '>', Carbon::yesterday())
+            ->concat($bookedEvents->where('date', '<=', Carbon::yesterday())->sortByDesc('date'));
 
         return view('user.show', compact('user', 'customer', 'bookedEvents'));
     }

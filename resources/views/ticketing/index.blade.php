@@ -9,10 +9,10 @@
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
     </div>
 
-    <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
+    {{-- <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
       <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700 mr-5"
         href="{{ route('ticket-records.create') }}">Create New</a>
-    </div>
+    </div> --}}
 
     <div class="lg:w-3/4 w-full mx-auto overflow-auto bg-white shadow-md rounded">
       <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -33,7 +33,12 @@
               <a href="{{ route('ticket-records.edit', $ticket) }}" class="hover:underline"> {{ $ticket->number }}</a>
             </td>
 
-            <td class="px-4 py-2">{{ $ticket->customer->name }} <br> {{ $ticket->customer->phone_no }}</td>
+            <td class="px-4 py-2">
+              <a href="{{ route('customers.show', $ticket->customer) }}" class="hover:underline">
+                {{ $ticket->customer->name }} <br> {{ $ticket->customer->phone_no }}
+              </a>
+            </td>
+
             <td class="px-4 py-2">{{ $ticket->activity->name }} <br> <span class="font-semibold">MVR {{ $ticket->price }}</span></td>
             <td class="px-4 py-2 hidden sm:table-cell">{{ $ticket->event->title }} <br> {{ $ticket->event->date->toFormattedDateString() }}</td>
             <td class="px-4 py-2">{{ $ticket->tickets }}</td>
