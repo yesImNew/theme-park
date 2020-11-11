@@ -2,7 +2,7 @@
 @section('title', 'Hotels')
 
 @section('content')
-<section class="text-gray-700 body-font">
+<section class="text-gray-700 body-font min-h-screen">
   <div class="container px-5 py-12 mx-auto">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Book a Hotel</h1>
@@ -64,5 +64,8 @@
   </div>
 
 </section>
+@endsection
 
+@section('footer')
+  @include('layouts.footer')
 @endsection
