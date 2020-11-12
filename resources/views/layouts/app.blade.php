@@ -15,6 +15,8 @@
     html { scroll-behavior: smooth; }
     [x-cloak] { display: none; }
   </style>
+
+  @yield('styles')
 </head>
 <body class="bg-gray-100">
 

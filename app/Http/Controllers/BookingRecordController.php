@@ -17,7 +17,8 @@ class BookingRecordController extends Controller
      */
     public function index()
     {
-        $bookings = BookingRecord::with(['event', 'customer', 'room'])->paginate(10);
+        $bookings = BookingRecord::with(['event', 'customer', 'room'])
+            ->latest()->paginate(10);
 
         return view('booking.index', compact('bookings'));
     }

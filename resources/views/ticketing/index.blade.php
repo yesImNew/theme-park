@@ -6,13 +6,8 @@
   <div class="container px-5 py-12 mx-auto">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Ticket Records</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">View, Edit and Delete Ticket Records.</p>
     </div>
-
-    {{-- <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
-      <a class="text-blue-500 inline-flex items-center md:mb-2 lg:mb-0 hover:text-blue-700 mr-5"
-        href="{{ route('ticket-records.create') }}">Create New</a>
-    </div> --}}
 
     <div class="lg:w-3/4 w-full mx-auto overflow-auto bg-white shadow-md rounded">
       <table class="table-auto w-full text-left whitespace-no-wrap">

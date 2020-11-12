@@ -14,6 +14,10 @@
       <a class="focus:outline-none {{ Request::is('/') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('home') }}">Home</a>
       <a class="focus:outline-none ml-5 {{ Request::is('home/*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Hotels</a>
 
+      @if (Auth::user()->role == 'reception')
+      <a class="focus:outline-none ml-5 {{ Request::is('home/*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Today's Bookings</a>
+      @endif
+
       <!-- Admin dropdown -->
       @can('manage')
         @include('partials.admin-dropdown')

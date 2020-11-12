@@ -51,7 +51,7 @@ class ActivityController extends Controller
      */
     public function show(Activity $activity)
     {
-        //
+        return view('activity.show', compact('activity'));
     }
 
     /**

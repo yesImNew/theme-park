@@ -6,7 +6,7 @@
   <div class="container px-5 py-12 mx-auto">
     <div class="flex flex-col text-center w-full mb-10">
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Booking Records</h1>
-      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">View, Create and Delete booking records.</p>
     </div>
 
     <div class="flex pl-4 my-4 lg:w-3/4 w-full mx-auto">
@@ -21,9 +21,9 @@
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl">Reference</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Customer</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Event</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 hidden sm:table-cell">Room</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Room</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">Price</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center hidden md:table-cell">Actions</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tr text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -40,8 +40,8 @@
             <td class="px-4 py-2">{{ $booking->room->number }} <br> {{ $booking->room->type->name }}</td>
             <td class="px-4 py-2">{{ $booking->price }}</td>
 
-            <td class="px-4 py-2 justify-center hidden md:flex">
-              <a href="{{ route('booking-records.edit', $booking) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
+            <td class="px-4 py-2 justify-center">
+              {{-- <a href="{{ route('booking-records.edit', $booking) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a> --}}
 
               <form action="{{ route('booking-records.destroy', $booking) }}" method="POST">
                 @csrf @method('DELETE')

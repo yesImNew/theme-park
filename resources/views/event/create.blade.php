@@ -16,7 +16,7 @@
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="title"> Event Title </label>
           <input class="form-input {{ $errors->has('title') ? 'border-red-500' : '' }}"
-            type="text" name="title" placeholder="Eid al-Fitr" value="{{ old('title') }}">
+            type="text" name="title" placeholder="Event Name" value="{{ old('title') }}">
 
           @error('title') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
         </div>

@@ -32,12 +32,10 @@
               <a href="{{ route('activities.show', $activity) }}" class="hover:underline"> {{ $activity->number }}</a>
             </td>
 
-            <td class="px-4 py-2">
-              <a href="{{ route('activities.show', $activity) }}" class="hover:underline whitespace-normal"> {{ $activity->name }}</a>
-            </td>
+            <td class="px-4 py-2">{{ $activity->name }}</td>
 
             <td class="px-4 py-2 whitespace-normal">{{ $activity->details }}</td>
-            <td class="px-4 py-2 hidden sm:table-cell">{{ $activity->price }}</td>
+            <td class="px-4 py-2">{{ $activity->price }}</td>
 
             <td class="px-4 py-2 hidden md:flex flex-wrap justify-center">
               <a href="{{ route('activities.edit', $activity) }}"

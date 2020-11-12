@@ -54,7 +54,7 @@ class TicketRecordController extends Controller
     {
         $data = $request->validate([
             'scheduled_event_id' => 'required|exists:scheduled_events,id',
-            'activities.*.tickets' => 'nullable|integer|min:1',
+            'activities.*.tickets' => 'nullable|integer|min:1|max:10',
         ]);
 
         $activities = $data['activities'];

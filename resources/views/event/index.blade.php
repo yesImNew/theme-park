@@ -36,7 +36,7 @@
 
             <td class="px-4 py-2 whitespace-normal hidden md:table-cell">{{ $event->comments }}</td>
 
-            <td class="px-4 py-2 justify-center hidden md:flex">
+            <td class="px-4 py-2 justify-center flex">
               <a href="{{ route('scheduled-events.edit', $event) }}" class="px-4 py-1 mr-1 rounded border border-blue-500 hover:bg-blue-400 hover:text-gray-100 inline-block">Edit</a>
 
               <form action="{{ route('scheduled-events.destroy', $event) }}" method="POST">
