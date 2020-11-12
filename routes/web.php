@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingRecordController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReceptionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\ScheduledEventController;
@@ -39,5 +40,6 @@ Route::middleware('auth')->group(function () {
         'ticket-records' => TicketRecordController::class,
     ]);
 
-    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show')->middleware('auth');;
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/home/reception', [ReceptionController::class, 'index'])->name('reception.index');
 });

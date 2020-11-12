@@ -12,10 +12,10 @@
     <nav class="hidden mr-auto ml-4 py-1 pl-4 border-l border-gray-400 sm:flex flex-wrap items-center text-base justify-center">
       @auth
       <a class="focus:outline-none {{ Request::is('/') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('home') }}">Home</a>
-      <a class="focus:outline-none ml-5 {{ Request::is('home/*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Hotels</a>
+      <a class="focus:outline-none ml-5 {{ Request::is('home/hotels') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Hotels</a>
 
       @if (Auth::user()->role == 'reception')
-      <a class="focus:outline-none ml-5 {{ Request::is('home/*') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('hotel.booking') }}">Today's Bookings</a>
+      <a class="focus:outline-none ml-5 {{ Request::is('home/reception') ? 'text-blue-500' : 'hover:text-gray-900'}}" href="{{ route('reception.index') }}">Today's Bookings</a>
       @endif
 
       <!-- Admin dropdown -->

@@ -28,9 +28,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage', function ($user) {
             return $user->isAdmin;
         });
-
-        Gate::define('view-bookings', function ($user) {
-            return $user->isAdmin || $user->role == 'reception';
-        });
     }
 }
